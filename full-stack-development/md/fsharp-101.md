@@ -23,7 +23,9 @@ MR and F# have implemented or inspired C# features such as [Generics](https://bl
 
 ### F# and C# - soon #
 
-![csharp9](assets/img/csharp9.PNG)
+![csharp9](full-stack-development/assets/img/csharp9.PNG)
+
+---
 
 ### Why use F#? #
 
@@ -35,6 +37,8 @@ Thoughtworks Tech Radar - Assess - October 2012
 
 @quote[F# is excellent at concisely expressing business and domain logic. Developers trying to achieve explicit business logic within an application may opt to express their domain in F# with the majority of plumbing code in C#.](thoughtworks.com/radar/languages-and-frameworks/f)
 
+---
+
 ### F# 101
 
 - (Very) Statically typed, types mostly inferred
@@ -43,7 +47,7 @@ Thoughtworks Tech Radar - Assess - October 2012
 - Avoid/restricts null
 - White space delimited
 
----?code=code/syntax.fsx&lang=fs
+---?code=full-stack-development/code/syntax.fsx&lang=fs
 
 @[1-4](Assign values, infers types.)
 @[6-9](Lists)

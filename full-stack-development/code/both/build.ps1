@@ -1,1 +1,0 @@
-dotnet build /warnaserror:FS0025

@@ -8,14 +8,14 @@
 - Fabulous
 
 
----?include=md/fsharp-101.md
+---?include=full-stack-development/md/fsharp-101.md
 
 --- 
 
 
----?include=md/type-providers.md
+---?include=full-stack-development/md/type-providers.md
 
----?include=md/other-cool-stuff.md
+---?include=full-stack-development/md/other-cool-stuff.md
 
 ---
 

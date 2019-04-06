@@ -12,6 +12,8 @@
 
 --- 
 
+---?include=full-stack-development/md/safe.md
+
 
 ---?include=full-stack-development/md/type-providers.md
 

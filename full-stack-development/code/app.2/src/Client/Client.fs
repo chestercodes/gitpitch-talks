@@ -116,17 +116,18 @@ let update (msg : Msg) (currentModel : Model) : Model * Cmd<Msg> =
         | Unknown error -> 
             { currentModel with Loading = false; ErrorMessage = Some error }, Cmd.none
     
-let errorOrBlankDiv (model : Model) =
-    match model.ErrorMessage with
-    | Some error -> Heading.h4 [] [str(error)]
-    | None -> div [] []
-
-let loadingOrBlankDiv (model : Model) =
-    match model.Loading with
-    | true -> Heading.h4 [] [str("Loading...")]
-    | false -> div [] []
-
 let view (model : Model) (dispatch : Msg -> unit) =
+
+    let errorOrBlankDiv (model : Model) =
+        match model.ErrorMessage with
+        | Some error -> Heading.h4 [] [str(error)]
+        | None -> div [] []
+
+    let loadingOrBlankDiv (model : Model) =
+        match model.Loading with
+        | true -> Heading.h4 [] [str("Loading...")]
+        | false -> div [] []
+
     div []
         [ 
             Navbar.navbar [ Navbar.Color IsPrimary ]

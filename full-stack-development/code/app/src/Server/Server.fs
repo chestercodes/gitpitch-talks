@@ -6,7 +6,7 @@ open Microsoft.Extensions.DependencyInjection
 open FSharp.Control.Tasks.V2
 open Giraffe
 open Saturn
-open Shared
+
 open Shared.Validation
 open Shared.DataTransfer
 open Shared.Responses
@@ -21,6 +21,7 @@ let contactPost next (ctx: HttpContext) =
     task {
         try
             let! contactDetails =  ctx.BindModelAsync<ContactDetails>()
+            System.Threading.Thread.Sleep(1000)
             match validateContactDetails contactDetails with
             | Passed -> 
                 return! json ({ Id = Guid.NewGuid().ToString() }) next ctx

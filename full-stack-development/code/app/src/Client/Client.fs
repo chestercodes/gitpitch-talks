@@ -14,6 +14,8 @@ open Shared.DataTransfer
 
 open Fulma
 open Shared.Responses
+open Shared.Validation
+open Fable.PowerPack
 
 
 // The model holds data that you want to keep track of while the application is running
@@ -32,14 +34,14 @@ type Model = {
 // the state of the application changes *only* in reaction to these events
 type ApiResponse = 
     | Success of ContactDetailsResult
-    | ValidationError of string
+    | ValidationError of FourTwoTwo
+    | Unknown of string
 
 type Msg =
     | EmailChanged of string
     | PhoneChanged of string
     | Submit
-    | GotResponse of ContactDetailsResult
-    | ServerError of System.Exception
+    | GotResponse of ApiResponse
 
 // defines the initial state and initial command (= side-effect) of the application
 let init () : Model * Cmd<Msg> =
@@ -51,11 +53,6 @@ let init () : Model * Cmd<Msg> =
         ErrorMessage = None }
 
     initialModel, Cmd.none
-
-let messageFromValidationResponse (four42: FourTwoTwo) =
-    four42.errors 
-    |> List.map (fun x -> sprintf "Error: %s - %s" x.Tag x.Error)
-    |> String.concat "\n"
 
 let tryPostRecord2<'T> (url: string) (record:'T) (properties: RequestProperties list) =
     let defaultProps =
@@ -71,6 +68,23 @@ let tryPostRecord2<'T> (url: string) (record:'T) (properties: RequestProperties 
         then Ok response
         else Error response)
 
+let postContact model =
+    let promise m = 
+        tryPostRecord2 "/api/contact" { email = m.Email; phone = m.Phone } []
+        |> Fable.PowerPack.Promise.bind (fun result -> 
+            match result with
+            | Ok response -> response.json<ContactDetailsResult>().``then``(Success)
+            | Error response ->
+                match response.Status with
+                | 422 -> response.json<FourTwoTwo>()
+                            .``then``(ValidationError)
+                            .``catch``(fun x -> Unknown (x.ToString()))
+                | _ -> Fable.Import.JS.Promise.resolve(Unknown response.StatusText)
+        )
+        |> Fable.PowerPack.Promise.map GotResponse
+                        
+    Cmd.ofPromise promise model id (fun x -> GotResponse(Unknown (x.Message)))
+        
 // The update function computes the next state of the application based on the current state and the incoming events/messages
 // It can also run side-effects (encoded as commands) like calling the server via Http.
 // these commands in turn, can dispatch messages to which the update function will react.
@@ -83,26 +97,25 @@ let update (msg : Msg) (currentModel : Model) : Model * Cmd<Msg> =
         { currentModel with Phone = newPhone }, Cmd.none
     
     | Submit ->
-        let promise m = Fable.PowerPack.Fetch.postRecord "/api/contact" { email = m.Email; phone = m.Phone } []
-                        |> Fable.PowerPack.Promise.bind (fun response -> response.json<ContactDetailsResult>())
-                        |> Fable.PowerPack.Promise.map GotResponse
-                        
-        let cmd = Cmd.ofPromise promise currentModel id (fun x -> ServerError (x))
+        let cmd = postContact currentModel
         { currentModel with Loading = true; ErrorMessage = None }, cmd
     
     | GotResponse response ->
-        { currentModel with Loading = false; ErrorMessage = None; SubmittedId = Some response.Id }, Cmd.none
+        match response with
+        | Success resp -> 
+            { currentModel with Loading = false; ErrorMessage = None; SubmittedId = Some resp.Id }, Cmd.none
         
-    | ServerError error ->
-        { currentModel with Loading = false; ErrorMessage = Some error.Message }, Cmd.none
-    
-let button txt onClick =
-    Button.button
-        [ Button.IsFullWidth
-          Button.Color IsPrimary
-          Button.OnClick onClick ]
-        [ str txt ]
+        | ValidationError four22 ->
+            let mutable message = ""
+            for error in four22.errors do
+                let start = if message <> "" then ", " else ""
+                message <- message + start + error.Error
 
+            { currentModel with Loading = false; ErrorMessage = Some message }, Cmd.none
+        
+        | Unknown error -> 
+            { currentModel with Loading = false; ErrorMessage = Some error }, Cmd.none
+    
 let errorOrBlankDiv (model : Model) =
     match model.ErrorMessage with
     | Some error -> Heading.h4 [] [str(error)]
@@ -115,52 +128,40 @@ let loadingOrBlankDiv (model : Model) =
 
 let view (model : Model) (dispatch : Msg -> unit) =
     div []
-        [ Navbar.navbar [ Navbar.Color IsPrimary ]
-            [ Navbar.Item.div [ ]
-                [ Heading.h2 [ ]
-                    [ str "Deets" ] ] ]
+        [ 
+            Navbar.navbar [ Navbar.Color IsPrimary ]
+                [ Navbar.Item.div [ ]
+                    [ Heading.h2 [ ]
+                        [ str "Deets" ] ] ]
 
-          Container.container []
-              [ Content.content [ Content.Modifiers [ Modifier.TextAlignment (Screen.All, TextAlignment.Centered) ] ]
-                    [ Heading.h3 [] [ str ("Upload your deets: ") ] ]
-                
-                (
-                    match model.SubmittedId with
-                    | Some id -> 
-                        div [] [
-                            Text.span [] [ str( "Thank you: " + id ) ]
-                        ]
-                    | None -> 
-                        div [] [
-                            Columns.columns []
-                                [ 
-                                    Column.column [] [
-                                        Text.span [] [ str( "Email:" ) ]
-                                    ]
-                                    Column.column [] [
-                                        Input.text [ Input.OnChange (fun x -> dispatch (EmailChanged x.Value)) ]
-                                    ]
-                                ] 
-                            Columns.columns []
-                                [ 
-                                    Column.column [] [
-                                        Text.span [] [ str( "Phone:" ) ]
-                                    ]
-                                    Column.column [] [
-                                        Input.text [ Input.OnChange (fun x -> dispatch (PhoneChanged x.Value)) ]                            
-                                    ]
-                                ] 
-                            button "Submit" (fun _ -> dispatch Submit)                    
-                            loadingOrBlankDiv model
-                            errorOrBlankDiv model
-                        ]
-                )
+            Container.container []
+                [ 
+                    Content.content [ Content.Modifiers [ Modifier.TextAlignment (Screen.All, TextAlignment.Centered) ] ]
+                        [ Heading.h3 [] [ str ("Post your details: ") ] ]
+                    (
+                        match model.SubmittedId with
+                        | Some id -> Text.span [] [ str( "Thank you: " + id ) ]
+                        | None -> 
+                            div [] [
+                                Columns.columns [] [ 
+                                        Column.column [] [ Text.span [] [ str( "Email:" ) ] ]
+                                        Column.column [] [ Input.text [ Input.OnChange (fun x -> dispatch (EmailChanged x.Value)) ] ]
+                                    ] 
+                                
+                                Columns.columns [] [ 
+                                        Column.column [] [ Text.span [] [ str( "Phone:" ) ] ]
+                                        Column.column [] [ Input.text [ Input.OnChange (fun x -> dispatch (PhoneChanged x.Value)) ] ]
+                                    ] 
+                                
+                                Button.button [ Button.IsFullWidth; Button.Color IsPrimary; Button.OnClick (fun _ -> dispatch Submit) ]
+                                    [ str "Submit" ]
+
+                                loadingOrBlankDiv model
+                                errorOrBlankDiv model
+                            ]
+                    )
                 ]
-
-
-          Footer.footer [ ]
-                [ Content.content [ Content.Modifiers [ Modifier.TextAlignment (Screen.All, TextAlignment.Centered) ] ]
-                    [  ] ] ]
+        ]
 
 #if DEBUG
 open Elmish.Debug

@@ -1,0 +1,26 @@
+POST http://localhost:8085/api/contact HTTP/1.1
+content-type: application/json
+
+{
+    "email": "chester@burbidge.com",
+    "phone": "01234 567890"
+}
+
+###
+
+POST http://localhost:8085/api/contact HTTP/1.1
+content-type: application/json
+
+{
+    "email": "chester",
+    "phone": "chester"
+}
+
+###
+
+POST http://localhost:8085/api/contact HTTP/1.1
+content-type: application/json
+
+{
+    "bad": "request"
+}

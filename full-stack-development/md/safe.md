@@ -19,12 +19,15 @@
 
 Abstractions that can be used to build applications following the “model view update” style of architecture, as made famous by Elm.
 
-- Model - Application's state, immutable.
+- Model - Application's state, immutable
 - Message - change in application state
-- Command - When evaluated may produce message(s).
+- Command - When evaluated may produce message(s)
 
 ---
 
-- Init - This is a pure function that produces the inital state of your application and, optionally, commands to process.
-- Update - This is a pure function that produces a new state of your application given the previous state and, optionally, new commands to process.
-- View - This is a pure function that produces a new UI layout/content given the current state.
+- Init - produces the inital applications state and commands
+- Update - produces new state of application given the previous and message
+- View - produces a new UI layout/content given the current state.
+
+---
+

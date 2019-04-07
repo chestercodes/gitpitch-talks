@@ -27,16 +27,10 @@ module App =
                 if model.SubmittedId.IsNone then
                     [
                         View.Label(text = "Email")
-                        View.Entry(
-                            text = "",
-                            textChanged = (fun args -> dispatch (EmailChanged(args.NewTextValue)))
-                        )
+                        View.Entry(text = "", textChanged = (fun args -> dispatch (EmailChanged(args.NewTextValue))))
 
                         View.Label(text = "Phone")
-                        View.Entry(
-                            text = "",
-                            textChanged = (fun args -> dispatch (PhoneChanged(args.NewTextValue)))
-                        )
+                        View.Entry(text = "",textChanged = (fun args -> dispatch (PhoneChanged(args.NewTextValue))))
 
                         View.Button(text = "Submit", command = (fun () -> dispatch Submit), horizontalOptions = LayoutOptions.Center)
 

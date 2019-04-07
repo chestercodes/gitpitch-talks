@@ -95,20 +95,20 @@ Native JavaScript
 
 ```fsharp
 
-let mutable private oneToFiveArray = [| 1; 2; 3; 4; 5 |]
+let mutable private arr = [| 1; 2; 3; 4; 5 |]
 
-let oneToFiveString = 
-    Fable.Import.JS.JSON.stringify oneToFiveArray 
+let str = Fable.Import.JS.JSON.stringify arr 
 
 Fable.Import.JS.console.log("Hello world!")
-                                                          //
+                                                                            //
 ```
 
 ```javascript
 
-let oneToFiveArray = new Int32Array([1, 2, 3, 4, 5]);
-export const oneToFiveString = JSON.stringify(oneToFiveArray);
-console.log("Hello world!");
+let arr = new Int32Array([1, 2, 3, 4, 5]);
 
-                                                           //
+export const str = JSON.stringify(arr);
+
+console.log("Hello world!");
+                                                                            //
 ```

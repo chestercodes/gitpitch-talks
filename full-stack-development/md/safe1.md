@@ -48,26 +48,3 @@ Abstractions that can be used to build applications following the “model view 
 ### Fabel
 
 - Transpiler from F# -> JavaScript
-
----?include=full-stack-development/md/fable-examples.md
-
----
-
----?include=fable-examples.md
-
----
-
----
-
-### A - Azure / AWS 
-
----
-
-### S - Saturn / Suave
-
----
-
----?code=full-stack-development/code/scripts/CreateSafeApp.ps1&lang=ps
-
----
-

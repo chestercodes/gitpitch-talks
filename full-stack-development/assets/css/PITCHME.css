@@ -18,16 +18,24 @@
   box-shadow: none;
 }
 
+h1 {
+  font-variant: initial !important;
+  text-transform: none !important;
+}
+
 h2 {
   font-variant: initial !important;
+  text-transform: none !important;
 }
 
 h3 {
   font-variant: initial !important;
+  text-transform: none !important;
 }
 
 h4 {
   font-variant: initial !important;
+  text-transform: none !important;
 }
 
 /*

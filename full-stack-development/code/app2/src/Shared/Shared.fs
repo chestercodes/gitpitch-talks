@@ -1,11 +1,13 @@
 namespace Shared
+open System
 open System.Text.RegularExpressions
 
-type Counter = { Value : int }
-
 module DataTransfer =
+    
     type ContactDetails = { email: string; phone: string }
+    
     type ContactDetailsResult = { Id: string }
+
 
 module Validation =
     
@@ -15,22 +17,46 @@ module Validation =
         | Passed
         | Failed of ValidationError list
     
-    let validateEmail (contactDetails: DataTransfer.ContactDetails) =
+    let emailValidationError message =
+        Some { Tag = "email"; Error = message }
+
+    let phoneValidationError message =
+        Some { Tag = "phone"; Error = message }
+
+    let emailCantBeBlank (contactDetails: DataTransfer.ContactDetails) =
+        if String.IsNullOrWhiteSpace contactDetails.email then
+            emailValidationError "Email is blank"
+        else        
+            None    
+    
+    let phoneCantBeBlank (contactDetails: DataTransfer.ContactDetails) =
+        if String.IsNullOrWhiteSpace contactDetails.phone then
+            phoneValidationError "Phone is blank"
+        else        
+            None
+
+    let emailDoesNotMatchRegex (contactDetails: DataTransfer.ContactDetails) =
         let regex = Regex("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$")
         if regex.IsMatch contactDetails.email then
             None
         else
-            Some { Tag = "email"; Error = "Email doesnt match regex" }        
+            emailValidationError "Email doesnt match regex"
     
-    let validatePhone (contactDetails: DataTransfer.ContactDetails) =
+    let phoneDoesNotMatchRegex (contactDetails: DataTransfer.ContactDetails) =
         let regex = Regex("^[0-9\\s]+$")
-        if regex.IsMatch contactDetails.phone then
+        if regex.IsMatch contactDetails.phone then 
             None
-        else
-            Some { Tag = "phone"; Error = "Phone doesnt match regex" }        
+        else 
+            phoneValidationError "Phone doesnt match regex"
     
     let validateContactDetails (contactDetails: DataTransfer.ContactDetails) =
-        let contactDetailsValidations = [ validateEmail; validatePhone ]
+        
+        let contactDetailsValidations = [ 
+            emailCantBeBlank
+            phoneCantBeBlank 
+            emailDoesNotMatchRegex
+            phoneDoesNotMatchRegex 
+        ]
 
         let validationErrors = 
             contactDetailsValidations 
@@ -39,7 +65,9 @@ module Validation =
 
         match validationErrors with
         | [] -> Passed
-        | invalid -> Failed invalid
+        | errors -> Failed errors
+
 
 module Responses =
+
     type FourTwoTwo = { errors: Validation.ValidationError list }

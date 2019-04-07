@@ -1,17 +1,7 @@
-## SAFE stack
 
----
-
-### S - Saturn / Suave
-
-
----
-
-### A - Azure / AWS 
-
----
-
-### F - Fabel
+## SAFE stack 
+## ->
+## EFAS kcats
 
 ---
 
@@ -30,4 +20,15 @@ Abstractions that can be used to build applications following the “model view 
 - View - produces a new UI layout/content given the current state.
 
 ---
+
+### F - Fabel
+
+---
+
+### A - Azure / AWS 
+
+---
+
+### S - Saturn / Suave
+
 

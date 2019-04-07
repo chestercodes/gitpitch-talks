@@ -50,16 +50,11 @@ module Validation =
             phoneValidationError "Phone doesnt match regex"
     
     let validateContactDetails (contactDetails: DataTransfer.ContactDetails) =
-        
-        let contactDetailsValidations = [ 
-            emailCantBeBlank
-            phoneCantBeBlank 
-            emailDoesNotMatchRegex
-            phoneDoesNotMatchRegex 
-        ]
-
         let validationErrors = 
-            contactDetailsValidations 
+            [   emailCantBeBlank
+                phoneCantBeBlank 
+                emailDoesNotMatchRegex
+                phoneDoesNotMatchRegex ]
             |> List.map (fun validator -> validator contactDetails)
             |> List.choose id
 

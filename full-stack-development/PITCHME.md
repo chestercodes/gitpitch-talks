@@ -23,12 +23,9 @@
 
 ---?include=full-stack-development/md/fabulous.md
 
----
-
 That's it folks...
 
 Thanks for listening :-) Any questions?
-
 
 ---?include=full-stack-development/md/type-providers.md
 

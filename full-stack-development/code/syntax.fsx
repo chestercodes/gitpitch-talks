@@ -9,8 +9,8 @@ let oneToFive = 1 :: twoToFive   // :: creates list with new 1st element
 let zeroToFive = [0;1] @ twoToFive   // @ concats two lists
 
 // The "let" keyword also defines a named function.
-let square x = x * x          // Note that no parens are used.
-square 3                      // Now run the function. Again, no parens.
+let square x = x * x  // Note that no parens are used.
+square 3              // Now run the function. Again, no parens.
 
 // can specify types and spread declaration over lines
 let add    // function name
@@ -22,9 +22,9 @@ let add    // function name
 
 // to define a multiline function, just use indents. No semicolons needed.
 let evens list =
-   let isEven x = x % 2 = 0     // Define "isEven" as an inner ("nested") function
-   List.filter isEven list    // List.filter is like LINQ's Where
-evens oneToFive               // Now run the function
+   let isEven x = x % 2 = 0  // Define "isEven" as an inner ("nested") function
+   List.filter isEven list   // List.filter is like LINQ's Where
+evens oneToFive              // Now run the function
 
 // pipe operator can be used with anonymous function
 let evens2 list =
@@ -32,8 +32,8 @@ let evens2 list =
    |> List.filter (fun x -> x % 2 = 0) 
 
 // Tuple types are pairs, triples, etc. Tuples use commas.
-let twoTuple = 1,2
-let threeTuple = "a",2,true
+let twoTuple = 1, 2
+let threeTuple = ("a", 2, true)
 
 // The printf/printfn functions are similar to Console.Write/WriteLine functions.
 printfn "Printing an int %i, a float %f, a bool %b" 1 2.0 true

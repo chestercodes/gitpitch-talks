@@ -14,41 +14,12 @@
 
 ---
 
-### Type Provider Example
-
-Let's make our first F# program!
-
----?code=code/ps/CreateDemoProject.ps1&lang=ps
-
-@[1-8](Create a new dotnet console project with -lang parameter F#)
-@[14-17](Install type providers from nuget packages)
-
----
-
 ### Existing type providers
 
 Json, Xml, Csv, Html
 
 Sql, Azure Storage, GraphQL
 
-R ...
-
 ---
 
-### RProvider
-
-Can send calculation about bank accounts to be plotted by R
-
----?code=code/all/Demo/Program.fs&lang=fs
-
-@[26-29](Install RProvider and open in code)
-@[105-115](Calculate amounts for banks)
-@[117-124](Calculate graph limits)
-@[131-138](Create blank graph with R.plot)
-@[140-148](Add R.lines for each bank)
-@[153-161](Add legends and title)
-
----
-
-![BanksGraph](assets/img/banks.png) 
-
+### Type Provider Example

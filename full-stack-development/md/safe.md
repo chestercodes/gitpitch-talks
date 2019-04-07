@@ -27,20 +27,35 @@ Abstractions that can be used to build applications following the “model view 
 
 ---
 
-#### Babel
+### Babel
 
 - JavaScript evolves faster than browser usage
 - Babel is a JavaScript transpiler
 - JavaScript/Other -> legacy browser compatible JS
 
+```javascript
+[1, 2, 3].map((n) => n + 1)
+```
+
+```javascript
+[1, 2, 3].map(function(n) {
+  return n + 1
+})
+```
+
 ---
 
-#### Fabel
+### Fabel
 
 - Transpiler from F# -> JavaScript
 
 ---?include=full-stack-development/md/fable-examples.md
 
+---
+
+---?include=fable-examples.md
+
+---
 
 ---
 

@@ -1,9 +1,14 @@
-## need dotnet sdk 2.2, node.js, yarn, 
+  # =======================
+  #    Getting started
+  # =======================
 
-dotnet tool install -g fake-cli
+  # need dotnet sdk 2.2, node.js, yarn, 
 
-dotnet new -i SAFE.Template
+  dotnet tool install -g fake-cli
 
-dotnet new SAFE
+  dotnet new -i SAFE.Template
 
-fake build --target run
+  dotnet new SAFE
+
+  fake build --target run
+ 

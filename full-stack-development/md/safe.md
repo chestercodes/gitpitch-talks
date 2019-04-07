@@ -33,8 +33,6 @@ Abstractions that can be used to build applications following the “model view 
 
 ---
 
-### Getting started
-
 ---?code=full-stack-development/code/scripts/CreateSafeApp.ps1&lang=ps
 
 ---

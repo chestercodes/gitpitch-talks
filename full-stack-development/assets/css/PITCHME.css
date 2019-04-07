@@ -17,6 +17,19 @@
   border: none;
   box-shadow: none;
 }
+
+h2 {
+  font-variant: initial !important;
+}
+
+h3 {
+  font-variant: initial !important;
+}
+
+h4 {
+  font-variant: initial !important;
+}
+
 /*
 .reveal a {
   color: white;

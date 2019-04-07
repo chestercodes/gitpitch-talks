@@ -20,21 +20,12 @@ module Validation =
     let emailValidationError message =
         Some { Tag = "email"; Error = message }
 
-    let phoneValidationError message =
-        Some { Tag = "phone"; Error = message }
-
     let emailCantBeBlank (contactDetails: DataTransfer.ContactDetails) =
         if String.IsNullOrWhiteSpace contactDetails.email then
             emailValidationError "Email is blank"
         else        
             None    
     
-    let phoneCantBeBlank (contactDetails: DataTransfer.ContactDetails) =
-        if String.IsNullOrWhiteSpace contactDetails.phone then
-            phoneValidationError "Phone is blank"
-        else        
-            None
-
     let emailDoesNotMatchRegex (contactDetails: DataTransfer.ContactDetails) =
         let regex = Regex("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$")
         if regex.IsMatch contactDetails.email then
@@ -42,6 +33,15 @@ module Validation =
         else
             emailValidationError "Email doesnt match regex"
     
+    let phoneValidationError message =
+        Some { Tag = "phone"; Error = message }
+
+    let phoneCantBeBlank (contactDetails: DataTransfer.ContactDetails) =
+        if String.IsNullOrWhiteSpace contactDetails.phone then
+            phoneValidationError "Phone is blank"
+        else        
+            None
+
     let phoneDoesNotMatchRegex (contactDetails: DataTransfer.ContactDetails) =
         let regex = Regex("^[0-9\\s]+$")
         if regex.IsMatch contactDetails.phone then 

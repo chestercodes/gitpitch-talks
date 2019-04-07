@@ -66,13 +66,13 @@ type Person = {
 type Contact =
     | Email of string
     | Phone of string
-  
+                                                  //
 ```
 
 ---
 
 ```javascript
-import { union, record, string, int32 } from "fable-library/Reflection.js";
+import { union,record,string,int32 } from "fable-library/Reflection.js";
 import { Union, declare, Record } from "fable-library/Types.js";
 export const Person = declare(
     function Test_Person(arg1, arg2) {
@@ -81,10 +81,34 @@ export const Person = declare(
 export function Person$reflection() {return record(
         "Test.Person", [], Person,
         () => [["Age", int32], ["Name", string]] );}
-export const Contact = declare(function Test_Contact(tag, name, ...fields) {
-        Union.call(this, tag, name, ...fields);
-    }, Union);
+export const Contact = declare(
+    function Test_Contact(tag, name, ...fields) {
+        Union.call(this, tag, name, ...fields); }, Union);
 export function Contact$reflection() {return union(
         "Test.Contact", [], Contact, 
         () => [["Email", [string]], ["Phone", [string]]] ); }
+```
+
+---
+
+Native JavaScript
+
+```fsharp
+
+let mutable private oneToFiveArray = [| 1; 2; 3; 4; 5 |]
+
+let oneToFiveString = 
+    Fable.Import.JS.JSON.stringify oneToFiveArray 
+
+Fable.Import.JS.console.log("Hello world!")
+                                                          //
+```
+
+```javascript
+
+let oneToFiveArray = new Int32Array([1, 2, 3, 4, 5]);
+export const oneToFiveString = JSON.stringify(oneToFiveArray);
+console.log("Hello world!");
+
+                                                           //
 ```

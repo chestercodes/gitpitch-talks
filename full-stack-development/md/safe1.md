@@ -48,3 +48,4 @@ Abstractions that can be used to build applications following the “model view 
 ### Fabel
 
 - Transpiler from F# -> JavaScript
+- Typed access to native JavaScript apis

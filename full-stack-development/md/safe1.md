@@ -15,9 +15,12 @@ Abstractions that can be used to build applications following the “model view 
 
 ---
 
-- Init `: unit -> Model * Cmd<Msg>` - produces the inital applications state and commands
-- Update `: Msg -> Model -> Model * Cmd<Msg>` - produces new state of application given the previous and message
-- View `: Model -> (Msg -> unit) -> 'a ` - produces a new UI layout/content given the current state.
+- Init `: unit -> Model * Cmd<Msg>`
+- - produces the inital applications state and commands
+- Update `: Msg -> Model -> Model * Cmd<Msg>`
+- - produces new state of application given the previous and message
+- View `: Model -> (Msg -> unit) -> 'ui `
+- - produces a new UI layout/content given the current state.
 
 ---
 

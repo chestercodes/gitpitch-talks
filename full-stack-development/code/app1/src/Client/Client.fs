@@ -14,12 +14,12 @@ type Model = { Counter: Counter }
 // The Msg type defines what events/actions can occur while the application is running
 // the state of the application changes *only* in reaction to these events
 type Msg =
-| Increment
-| Decrement
+    | Increment
+    | Decrement
 
 // defines the initial state and initial command (= side-effect) of the application
 let init () : Model * Cmd<Msg> =
-    let initialModel = { Counter = { Value = 42} }
+    let initialModel = { Counter = { Value = 42 } }
     initialModel, Cmd.none
 
 // The update function computes the next state of the application based on the current state and the incoming events/messages

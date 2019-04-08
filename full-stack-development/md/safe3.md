@@ -25,6 +25,19 @@ How applications tend to be hosted.
 
 - Views - render templates
 
+---
+
+### Safe - Lets make an app
+
+app for user contact information. Want to have:
+
+- Inputs for email and phone.
+- Submit button posts to server
+- Validation on server and return contact guid if valid.
+- If not valid then display errors.
+
+Lets make an app!
+
 ---?code=full-stack-development/code/scripts/CreateSafeApp.ps1&lang=ps
 
 

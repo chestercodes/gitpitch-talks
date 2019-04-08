@@ -11,4 +11,12 @@ Started by Elm, popularised by redux
 
 ![MVU](full-stack-development/assets/img/mvu.png)
 
+---
+
+- State immutable
+- App changes limited to update
+- Easier to reason about causality
+
+---
+
 

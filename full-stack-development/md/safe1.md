@@ -24,13 +24,13 @@ Abstractions that can be used to build applications following the “model view 
 
 ---
 
-### F - Fabel
+## F - Fable
 
-### ( F# Babel )
+## ( F# Babel )
 
 ---
 
-### Babel
+## Babel
 
 - JavaScript evolves faster than browser usage
 - Babel is a JavaScript transpiler
@@ -48,7 +48,7 @@ Abstractions that can be used to build applications following the “model view 
 
 ---
 
-### Fabel
+## Fable
 
 - Transpiler from F# -> JavaScript
 - Typed access to native JavaScript apis

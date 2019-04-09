@@ -9,8 +9,7 @@ Started by Elm, popularised by redux
 
 ---
 
-- State immutable
-- App changes limited to update
-- Easier to reason about causality
+- Model state immutable
+- changes limited to update, can reason about causality
 
 ![MVU](full-stack-development/assets/img/mvu.png)

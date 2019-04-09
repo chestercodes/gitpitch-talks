@@ -1,4 +1,12 @@
 
+### Fable and Elmish
+
+![Elmish](full-stack-development/assets/img/elmishLayers.png)
+
+https://safe-stack.github.io/docs/component-elmish/
+
+---
+
 ### A - Azure / AWS 
 
 How applications tend to be hosted.

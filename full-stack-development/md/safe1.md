@@ -24,6 +24,12 @@ Abstractions that can be used to build applications following the “model view 
 
 ---
 
+### Elmish types
+
+![MVU](full-stack-development/assets/img/mvuTypes.png)
+
+---
+
 ## F - Fable
 
 ## ( F# Babel )

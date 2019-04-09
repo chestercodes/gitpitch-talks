@@ -35,7 +35,13 @@ How applications tend to be hosted.
 
 ---
 
-### Safe - Lets make an app
+### Safe full stack
+
+![FullStack](full-stack-development/assets/img/safeFullStack.png)
+
+---
+
+### Safe - app
 
 app for user contact information. Want to have:
 

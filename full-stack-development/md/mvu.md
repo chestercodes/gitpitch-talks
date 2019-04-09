@@ -9,7 +9,8 @@ Started by Elm, popularised by redux
 
 ---
 
-- Model state immutable
-- changes limited to update, can reason about causality
-
 ![MVU](full-stack-development/assets/img/mvu.png)
+
+- Model state immutable
+- app changes limited to update
+

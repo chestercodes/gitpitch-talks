@@ -39,6 +39,8 @@ How applications tend to be hosted.
 
 ![FullStack](full-stack-development/assets/img/safeFullStack.png)
 
+https://safe-stack.github.io/docs/overview/
+
 ---
 
 ### Safe - app

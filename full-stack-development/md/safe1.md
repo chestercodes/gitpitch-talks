@@ -57,6 +57,8 @@ Abstractions that can be used to build applications following the “model view 
 ## Fable
 
 - Transpiler from F# -> JavaScript
+
+- F# code AST to JS, language level, not IL
+
 - Typed access to native JavaScript apis
-- Converts F# code AST to JS, language level, not IL
 

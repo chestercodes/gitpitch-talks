@@ -43,7 +43,7 @@ https://safe-stack.github.io/docs/overview/
 
 ---
 
-### Safe - app
+### app
 
 app for user contact information. Want to have:
 

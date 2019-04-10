@@ -1,0 +1,1 @@
+ls -R  | where { ! $_.PSIsContainer } | where { ! $_.Directory.Name.ToString().StartsWith(".") } | where { ! $_.Name.ToString().StartsWith(".") } | Select-object FullName

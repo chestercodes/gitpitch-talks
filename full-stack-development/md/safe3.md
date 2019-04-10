@@ -1,9 +1,5 @@
 
-### Fable and Elmish
-
-![Elmish](full-stack-development/assets/img/elmishLayers.png)
-
-https://safe-stack.github.io/docs/component-elmish/
+![FableElmish](full-stack-development/assets/img/mvuFable.png)
 
 ---
 
@@ -17,11 +13,11 @@ How applications tend to be hosted.
 
 ---
 
-### S - Saturn (/Suave/Giraffe)
+### S - Saturn
 
 - Server-side MVC web development framework written in F#, heavily inspired by Elixir's Phoenix.
 
-- Commonly used with ASP.NET Core, served by Kestrel. Can be used with Giraffe.
+- Top-level abstractions over ASP.NET Core, served by Kestrel.
 
 - Includes scaffolding tools for rapid application development
 

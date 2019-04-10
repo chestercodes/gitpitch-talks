@@ -26,33 +26,24 @@ let view (model : Model) (dispatch : Msg -> unit) =
     let counterMessage = "Press buttons to manipulate counter: " + string model.Counter.Value
     
     let button txt onClick =
-        Button.button [ 
-            Button.IsFullWidth
-            Button.Color IsPrimary
-            Button.OnClick onClick ]
+        Button.button [ Button.IsFullWidth; Button.Color IsPrimary; Button.OnClick onClick ]
             [ str txt ]
 
     div [] [ 
         Navbar.navbar [ Navbar.Color IsPrimary ]
-            [ Navbar.Item.div [ ]
-                [ Heading.h2 [ ]
-                    [ str "SAFE Template" ] ] ]
+            [ Navbar.Item.div [ ] [ Heading.h2 [ ] [ str "SAFE Template" ] ] ]
 
         Container.container [] [ 
                 Content.content [ Content.Modifiers [ Modifier.TextAlignment (Screen.All, TextAlignment.Centered) ] ]
                     [ Heading.h3 [] [ str counterMessage ] ]
-                Columns.columns []
-                    [ Column.column [] [ button "-" (fun _ -> dispatch Decrement) ]
-                      Column.column [] [ button "+" (fun _ -> dispatch Increment) ] ] ]
-
-        Footer.footer [ ] [
-            Content.content [ Content.Modifiers [ Modifier.TextAlignment (Screen.All, TextAlignment.Centered) ] ]
-                [  ] ] ]
+                Columns.columns [] [ 
+                    Column.column [] [ button "-" (fun _ -> dispatch Decrement) ]
+                    Column.column [] [ button "+" (fun _ -> dispatch Increment) ] ] ] 
+        ]
 
 let init () : Model * Cmd<Msg> =
     let initialModel = { Counter = { Value = 42 } }
     initialModel, Cmd.none
-
 
 #if DEBUG
 open Elmish.Debug

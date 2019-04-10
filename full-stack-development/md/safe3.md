@@ -7,13 +7,17 @@ https://safe-stack.github.io/docs/component-elmish/
 
 ---
 
+### Fable and Elmish Demo 
+
+---
+
 ### A - Azure / AWS 
 
 How applications tend to be hosted.
 
 ---
 
-### S - Saturn (/ Suave)
+### S - Saturn (/Suave/Giraffe)
 
 - Server-side MVC web development framework written in F#, heavily inspired by Elixir's Phoenix.
 

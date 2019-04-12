@@ -5,20 +5,26 @@
 
 ---
 
-### E - Elmish
+### E - Elmish (Elm-ish)
 
-Abstractions that can be used to build applications following the “model view update” style of architecture, as made famous by Elm.
+MVU pattern abstractions library.
+
+Main components and type signatures:
 
 - Model: `Model` - Application's state, immutable
+
 - Message: `Msg` - change in application state
+
 - Command: `Cmd<Msg>` - When evaluated may produce message(s)
 
 ---
 
 - Init: `unit -> Model * Cmd<Msg>`
 - - produces the inital applications state and commands
+
 - Update: `Msg -> Model -> Model * Cmd<Msg>`
 - - produces new state of application given the previous and message
+
 - View: `Model -> (Msg -> unit) -> 'ui `
 - - produces a new UI layout/content given the current state.
 

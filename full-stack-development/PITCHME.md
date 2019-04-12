@@ -5,11 +5,8 @@
 - F# 101
 - MVU Pattern
 - SAFE
-- F# 102
-- SAFE - app
-- Fabulous, intro and app
-- type providers (time)
-
+- Fabulous
+- type providers
 
 ---?include=full-stack-development/md/fs-101.md
 

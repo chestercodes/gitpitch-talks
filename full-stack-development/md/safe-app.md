@@ -14,7 +14,7 @@ Lets make an app!
 
 ---
 
-![Files](full-stack-development/assets/img/SafeNewFilesClient.jpg)
+![Files](full-stack-development/assets/img/SafeNewFilesAnnotated.jpg)
 
 ---
 

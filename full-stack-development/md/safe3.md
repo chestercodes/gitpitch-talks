@@ -15,7 +15,7 @@ How applications tend to be hosted.
 
 ### S - Saturn
 
-- Server-side MVC web development framework written in F#, heavily inspired by Elixir's Phoenix.
+- Server-side MVC web development framework, heavily inspired by Elixir's Phoenix.
 
 - Top-level abstractions over ASP.NET Core, served by Kestrel.
 

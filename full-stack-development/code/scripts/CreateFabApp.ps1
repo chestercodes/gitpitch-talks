@@ -2,4 +2,4 @@
 
 dotnet new -i Fabulous.Templates
 
-dotnet new fabulous-app -n Mobile --iOS=false
+dotnet new fabulous-app -n FabApp

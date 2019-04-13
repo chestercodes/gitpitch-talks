@@ -16,8 +16,6 @@
 ---?include=full-stack-development/md/safe2.md
 ---?include=full-stack-development/md/safe3.md
 
----?include=full-stack-development/md/fs-102.md
-
 ---?include=full-stack-development/md/safe-app.md
 
 ---?include=full-stack-development/md/fabulous.md

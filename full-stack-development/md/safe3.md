@@ -40,21 +40,3 @@ How applications tend to be hosted.
 ![FullStack](full-stack-development/assets/img/safeFullStack.png)
 
 https://safe-stack.github.io/docs/overview/
-
----
-
-### app
-
-app for user contact information. Want to have:
-
-- Inputs for email and phone.
-- Submit button posts to server
-- Validation on server and return contact guid if valid.
-- If not valid then display errors.
-
-Lets make an app!
-
----?code=full-stack-development/code/scripts/CreateSafeApp.ps1&lang=ps
-
-![Files](full-stack-development/assets/img/SafeNewFilesClient.jpg)
-

@@ -6,7 +6,7 @@
 ---
 
 ### E - Elmish (Elm-ish)
-
+  
 MVU pattern abstractions library.
 
 Main components and type signatures:

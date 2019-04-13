@@ -27,4 +27,3 @@
 | Validation   |  yes   |   yes   |  yes  |   yes   |
 | Responses    |  yes   |   yes   |  yes  |   yes   |
 | ModelUpdate  |        |   yes   |  yes  |   yes   |
-| View         |        |         |       |         |

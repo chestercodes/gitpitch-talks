@@ -15,3 +15,16 @@
 
 ---
 
+### Code demo
+
+---
+
+### Code sharing update
+
+| Module       | Server | Browser |  iOS  | Android |
+| ------------ | ------ | ------  |------ |-------- |
+| DataTransfer |  yes   |   yes   |  yes  |   yes   |
+| Validation   |  yes   |   yes   |  yes  |   yes   |
+| Responses    |  yes   |   yes   |  yes  |   yes   |
+| ModelUpdate  |        |   yes   |  yes  |   yes   |
+| View         |        |         |       |         |

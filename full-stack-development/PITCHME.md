@@ -20,6 +20,13 @@
 
 ---?include=full-stack-development/md/fabulous.md
 
+
+### Summary
+
+SAFE and Fabulous allow code sharing across platforms
+
+---
+
 That's it folks...
 
 Thanks for listening :-) Any questions?

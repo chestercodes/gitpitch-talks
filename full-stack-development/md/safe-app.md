@@ -43,3 +43,17 @@ F# modules can be imported into dotnet projects.
 | Validation   |  yes   |
 | Responses    |  yes   |
 
+--- 
+
+### App demo
+
+--- 
+
+### Code sharing update
+
+| Module       | Server | Browser |
+| ------------ | ------ | ------  |
+| DataTransfer |  yes   |   yes   |
+| Validation   |  yes   |   yes   |
+| Responses    |  yes   |   yes   |
+| ModelUpdate  |        |   yes   |

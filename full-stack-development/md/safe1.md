@@ -7,9 +7,7 @@
 
 ### E - Elmish (Elm-ish)
   
-MVU pattern abstractions library.
-
-Main components and type signatures:
+MVU pattern abstractions library. Main components and type signatures:
 
 - Model: `Model` - Application's state, immutable
 
@@ -49,10 +47,12 @@ Main components and type signatures:
 - JavaScript/Other -> legacy browser compatible JS
 
 ```javascript
+// ES6
 [1, 2, 3].map((n) => n + 1)
 ```
 
 ```javascript
+// ES5 and below
 [1, 2, 3].map(function(n) {
   return n + 1
 })

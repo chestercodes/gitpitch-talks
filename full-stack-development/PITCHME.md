@@ -1,3 +1,13 @@
+---?image=full-stack-development/assets/img/CardBack.png
+
+---
+
+Developer at Parmenion
+
+F# hobbiest
+
+---
+
 ## F#ll Stack Development ##
 
 ---

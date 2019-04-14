@@ -1,4 +1,4 @@
----?image=full-stack-development/assets/img/CardBack.png
+---?image=full-stack-development/assets/img/CardBack.jpg
 
 ---
 

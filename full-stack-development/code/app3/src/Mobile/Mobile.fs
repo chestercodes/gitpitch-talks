@@ -1,7 +1,7 @@
 // Copyright 2018 Fabulous contributors. See LICENSE.md for license.
 namespace Mobile
 
-open SharedClient.Code
+open SharedClient.ModelUpdate
 open Fabulous.Core
 open Fabulous.DynamicViews
 open Xamarin.Forms

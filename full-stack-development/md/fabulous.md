@@ -25,9 +25,11 @@ https://docs.microsoft.com/en-gb/xamarin/cross-platform/app-fundamentals/buildin
 
 ### Xamarin.Forms
 
-- Cross platform UI toolkit
+- Cross-platform UI toolkit, abstracts components
 
-- Define single UI in XAML, rendered with platform controls
+- Define single UI in XAML
+
+- Platform specific controls rendered
 
 ---
 

@@ -11,7 +11,7 @@ open Elmish
 #endif
 
 
-module Code =
+module ModelUpdate =
 
     type Model = { 
         Email: string
@@ -44,14 +44,16 @@ module Code =
 
     let updatePartial (postContact: Model -> Cmd<Msg>) =
         fun (msg : Msg) (currentModel : Model) -> // : Model * Cmd<Msg>
+            let printErrors errors = 
+                errors 
+                |> List.map (fun x -> x.Error)
+                |> String.concat ", "
+                |> Some
+            
             let validateNewEmailOrPhone email phone = 
                 match validateContactDetails {email = email; phone = phone} with
                 | Passed -> None
-                | Failed errors ->
-                    errors 
-                    |> List.map (fun x -> x.Error)
-                    |> String.concat ", "
-                    |> Some
+                | Failed errors -> printErrors errors
             
             match msg with
             | EmailChanged newEmail -> 
@@ -70,12 +72,7 @@ module Code =
                     { currentModel with Loading = false; ErrorMessage = None; SubmittedId = Some resp.Id }, Cmd.none
                 
                 | ValidationError four22 ->
-                    let mutable message = ""
-                    for error in four22.errors do
-                        let start = if message <> "" then ", " else ""
-                        message <- message + start + error.Error
-
-                    { currentModel with Loading = false; ErrorMessage = Some message }, Cmd.none
+                    { currentModel with Loading = false; ErrorMessage = printErrors four22.errors }, Cmd.none
                 
                 | Unknown error -> 
                     { currentModel with Loading = false; ErrorMessage = Some error }, Cmd.none

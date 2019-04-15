@@ -17,8 +17,6 @@
 
 ---
 
-### Xamarin
-
 ![Xamarin](full-stack-development/assets/img/xamarinPlatform.png)
 
 https://docs.microsoft.com/en-gb/xamarin/cross-platform/app-fundamentals/building-cross-platform-applications/overview

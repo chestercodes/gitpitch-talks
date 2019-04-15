@@ -33,12 +33,6 @@ https://docs.microsoft.com/en-gb/xamarin/cross-platform/app-fundamentals/buildin
 
 ---
 
-![Xamarin](full-stack-development/assets/img/xamarinForms.png)
-
-https://xamarinhelp.com/xamarin-forms-making-traditional-xamarin-obsolete/
-
----
-
 ![Xamarin](full-stack-development/assets/img/xamarinNotes.png)
 
 https://docs.microsoft.com/en-gb/xamarin/get-started/quickstarts/styling?pivots=windows

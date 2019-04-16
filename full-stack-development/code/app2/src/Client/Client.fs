@@ -2,16 +2,11 @@ module Client
 
 open Elmish
 open Elmish.React
-
 open Fable.Helpers.React
-
 open Fable.PowerPack.Fetch
 open Fable.PowerPack.PromiseSeqExtensions
 open Fable.Core.JsInterop
 open Shared.DataTransfer
-
-
-
 open Fulma
 open Shared.Responses
 open Shared.Validation
@@ -54,26 +49,29 @@ let init () : Model * Cmd<Msg> =
 
     initialModel, Cmd.none
 
-let tryPostRecord2<'T> (url: string) (record:'T) (properties: RequestProperties list) =
+let tryPost<'T> (url: string) (record:'T) (properties: RequestProperties list) =
     let defaultProps =
         [ RequestProperties.Method HttpMethod.POST
         ; requestHeaders [ContentType "application/json"]
         ; RequestProperties.Body !^(toJson record)]
-    // Append properties after defaultProps to make sure user-defined values
-    // override the default ones if necessary
     let init = List.append defaultProps properties
     GlobalFetch.fetch(RequestInfo.Url url, requestProps init)
     |> Fable.PowerPack.Promise.map (fun response ->
-        if response.Ok
-        then Ok response
-        else Error response)
+        if response.Ok then 
+            Ok response
+        else 
+            Error response
+    )
 
 let postContact model =
     let promise m = 
-        tryPostRecord2 "/api/contact" { email = m.Email; phone = m.Phone } []
+        tryPost "/api/contact" { email = m.Email; phone = m.Phone } []
         |> Fable.PowerPack.Promise.bind (fun result -> 
             match result with
-            | Ok response -> response.json<ContactDetailsResult>().``then``(Success)
+            | Ok response -> 
+                response.json<ContactDetailsResult>()
+                    .``then``(Success)
+                    .``catch``(fun x -> Unknown (x.ToString()))
             | Error response ->
                 match response.Status with
                 | 422 -> response.json<FourTwoTwo>()
@@ -89,6 +87,12 @@ let postContact model =
 // It can also run side-effects (encoded as commands) like calling the server via Http.
 // these commands in turn, can dispatch messages to which the update function will react.
 let update (msg : Msg) (currentModel : Model) : Model * Cmd<Msg> =
+    let printErrors errors = 
+        errors 
+        |> List.map (fun x -> x.Error)
+        |> String.concat ", "
+        |> Some
+
     match msg with
     | EmailChanged newEmail -> 
         { currentModel with Email = newEmail }, Cmd.none
@@ -106,12 +110,7 @@ let update (msg : Msg) (currentModel : Model) : Model * Cmd<Msg> =
             { currentModel with Loading = false; ErrorMessage = None; SubmittedId = Some resp.Id }, Cmd.none
         
         | ValidationError four22 ->
-            let mutable message = ""
-            for error in four22.errors do
-                let start = if message <> "" then ", " else ""
-                message <- message + start + error.Error
-
-            { currentModel with Loading = false; ErrorMessage = Some message }, Cmd.none
+            { currentModel with Loading = false; ErrorMessage = printErrors four22.errors }, Cmd.none
         
         | Unknown error -> 
             { currentModel with Loading = false; ErrorMessage = Some error }, Cmd.none
@@ -124,9 +123,10 @@ let view (model : Model) (dispatch : Msg -> unit) =
         | None -> div [] []
 
     let loadingOrBlankDiv (model : Model) =
-        match model.Loading with
-        | true -> Heading.h4 [] [str("Loading...")]
-        | false -> div [] []
+        if model.Loading then
+            Heading.h4 [] [str("Loading...")]
+        else 
+            div [] []
 
     div []
         [ 

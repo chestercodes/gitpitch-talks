@@ -41,8 +41,11 @@ https://docs.microsoft.com/en-gb/xamarin/get-started/quickstarts/styling?pivots=
 
 ### Fabulous
 
-- View library to create Xamarin.Forms components
+- Elmish abstractions
 
+- Mobile app development tools / APIs
+
+- View library to create Xamarin.Forms components
 
 ---
 

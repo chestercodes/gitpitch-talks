@@ -6,7 +6,7 @@ Developer at Parmenion
 
 F# hobbiest
 
----
+---?image=full-stack-development/assets/img/TalkRepo.jpg
 
 ## F#ll Stack Development ##
 

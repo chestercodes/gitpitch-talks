@@ -18,8 +18,6 @@ F#
 ```fsharp
 let addOne arg1 = 
     arg1 + 1
-
-let name = "Chester" 
 ```
 
 JavaScript
@@ -28,8 +26,6 @@ JavaScript
 export function addOne(arg1) {
   return arg1 + 1;
 }
-
-export const name = "Chester";
 ```
 
 ---
@@ -38,11 +34,6 @@ F#
 
 ```fsharp
 let aRandomInt = (new System.Random()).Next(5)
-
-let addOne arg1 = 
-    arg1 + 1
-
-let name = "Chester" 
 ```
 
 JavaScript
@@ -50,15 +41,35 @@ JavaScript
 ```javascript
 import { randomNext } from "fable-library/Util.js";
 export const aRandomInt = randomNext(0, 5);
-
-export function addOne(arg1) {
-  return arg1 + 1;
-}
-
-export const name = "Chester";
 ```
 
 ---
+
+Native JavaScript
+
+```fsharp
+
+let mutable private arr = [| 1; 2; 3; 4; 5 |]
+
+let str = Fable.Import.JS.JSON.stringify arr 
+
+Fable.Import.JS.console.log("Hello world!")
+                                                                                                   //
+```
+
+```javascript
+
+let arr = new Int32Array([1, 2, 3, 4, 5]);
+
+export const str = JSON.stringify(arr);
+
+console.log("Hello world!");
+                                                                                                   //
+```
+
+---
+
+Not always pretty output
 
 ```fsharp
 
@@ -92,26 +103,3 @@ export function Contact$reflection() {return union(
         () => [["Email", [string]], ["Phone", [string]]] ); }
 ```
 
----
-
-Native JavaScript
-
-```fsharp
-
-let mutable private arr = [| 1; 2; 3; 4; 5 |]
-
-let str = Fable.Import.JS.JSON.stringify arr 
-
-Fable.Import.JS.console.log("Hello world!")
-                                                                                                   //
-```
-
-```javascript
-
-let arr = new Int32Array([1, 2, 3, 4, 5]);
-
-export const str = JSON.stringify(arr);
-
-console.log("Hello world!");
-                                                                                                   //
-```

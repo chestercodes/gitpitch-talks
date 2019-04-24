@@ -7,28 +7,25 @@
 
 ### E - Elmish (Elm-ish)
   
-MVU pattern abstractions library. Main components and type signatures:
+MVU pattern abstractions library.
 
-- Model: `Model` - Application's state, immutable
+- Model - Application's state, immutable
 
-- Message: `Msg` - change in application state
+- Message - A change in application state
 
-- Command: `Cmd<Msg>` - When evaluated may produce message(s)
-
----
-
-- Init: `unit -> Model * Cmd<Msg>`
-- - produces the inital applications state and commands
-
-- Update: `Msg -> Model -> Model * Cmd<Msg>`
-- - produces new state of application given the previous and message
-
-- View: `Model -> (Msg -> unit) -> 'ui `
-- - produces a new UI layout/content given the current state.
+- Command - When evaluated may produce message(s)
 
 ---
 
-### Elmish types
+- Init - produces inital state and commands
+
+- Update - produces new state of application given previous and message
+
+- View - produces UI layout/content given the current state.
+
+---
+
+### Elmish with type signatures
 
 ![MVU](full-stack-development/assets/img/mvuTypes.png)
 
@@ -66,5 +63,6 @@ MVU pattern abstractions library. Main components and type signatures:
 
 - F# code AST to JS, language level, not IL
 
-- Typed access to native JavaScript apis
+- Implementation of some .NET API equivalents
 
+- Typed access to native JavaScript apis

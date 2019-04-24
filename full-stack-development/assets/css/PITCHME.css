@@ -42,6 +42,10 @@ code {
   background-color: #8fd4ea;
 }
 
+span.hljs-comment {
+  color: #88e188  !important;
+}
+
 /*
 .reveal a {
   color: white;

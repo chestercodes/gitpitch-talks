@@ -1,4 +1,3 @@
-namespace Shared
 open System
 open System.Text.RegularExpressions
 
@@ -70,24 +69,3 @@ module Validation =
         match validationErrors with
         | [] -> Passed
         | errors -> Failed errors
-    
-    let printErrors errors = 
-        let mutable error = ""
-        for e in errors do
-            let sep = if error = "" then "" else ", " 
-            error <- error + sep + e.Error
-        Some error
-
-
-module DataTransfer =
-    open Domain
-    
-    type UnvalContactDetails = { 
-        email: UnvalEmail
-        phone: UnvalPhone }
-    
-    type ContactDetailsResult = { Id: string }
-
-    type FourTwoTwo = { errors: ValidationError list }
-
-                                                                                                                            //

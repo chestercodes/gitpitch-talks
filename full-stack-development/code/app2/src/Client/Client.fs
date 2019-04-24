@@ -80,12 +80,6 @@ let postContact model =
         
 
 let update (msg : Msg) (currentModel : Model) : Model * Cmd<Msg> =
-    let printErrors errors = 
-        let mutable error = ""
-        for e in errors do
-            let sep = if error = "" then "" else ", " 
-            error <- error + sep + e.Error
-        Some error
 
     match msg with
     | EmailChanged newEmail -> 

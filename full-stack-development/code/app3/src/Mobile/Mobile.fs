@@ -2,6 +2,7 @@
 namespace Mobile
 
 open SharedClient.ModelUpdate
+open Shared.Validation
 open Fabulous.Core
 open Fabulous.DynamicViews
 open Xamarin.Forms
@@ -12,12 +13,11 @@ module App =
     let postContact (model:Model) =
         async {
             do! Async.Sleep 200
-            let msg =
-                if model.ErrorMessage.IsSome then
-                    GotResponse(Unknown "Validations are incorrect")
-                else
-                    GotResponse(Success { Id = Guid.NewGuid().ToString()})
-            return msg }
+            let validationResult = validateContactDetails { email = model.Email; phone = model.Phone }
+            match validationResult with
+            | Passed -> return GotResponse(Success { Id = Guid.NewGuid().ToString()})
+            | Failed errors -> return GotResponse(ValidationError ({errors = errors}))
+        }
         |> Cmd.ofAsyncMsg
 
     let view (model: Model) dispatch =

@@ -8,15 +8,11 @@ open Fable.PowerPack.PromiseSeqExtensions
 open Fable.Core.JsInterop
 open Shared.DataTransfer
 open Fulma
-open Shared.Responses
+open Shared.Domain
 open Shared.Validation
 open Fable.PowerPack
 
 
-// The model holds data that you want to keep track of while the application is running
-// in this case, we are keeping track of a counter
-// we mark it as optional, because initially it will not be available from the client
-// the initial value will be requested from server
 type Model = { 
     Email: string
     Phone: string 
@@ -25,8 +21,7 @@ type Model = {
     ErrorMessage: string option
     }
 
-// The Msg type defines what events/actions can occur while the application is running
-// the state of the application changes *only* in reaction to these events
+
 type ApiResponse = 
     | Success of ContactDetailsResult
     | ValidationError of FourTwoTwo
@@ -38,7 +33,7 @@ type Msg =
     | Submit
     | GotResponse of ApiResponse
 
-// defines the initial state and initial command (= side-effect) of the application
+
 let init () : Model * Cmd<Msg> =
     let initialModel = { 
         Email = ""
@@ -65,7 +60,7 @@ let tryPost<'T> (url: string) (record:'T) (properties: RequestProperties list) =
 
 let postContact model =
     let promise m = 
-        tryPost "/api/contact" { email = m.Email; phone = m.Phone } []
+        tryPost "/api/contact" { email = Email m.Email; phone = Phone m.Phone } []
         |> Fable.PowerPack.Promise.bind (fun result -> 
             match result with
             | Ok response -> 
@@ -83,15 +78,14 @@ let postContact model =
                         
     Cmd.ofPromise promise model id (fun x -> GotResponse(Unknown (x.Message)))
         
-// The update function computes the next state of the application based on the current state and the incoming events/messages
-// It can also run side-effects (encoded as commands) like calling the server via Http.
-// these commands in turn, can dispatch messages to which the update function will react.
+
 let update (msg : Msg) (currentModel : Model) : Model * Cmd<Msg> =
     let printErrors errors = 
-        errors 
-        |> List.map (fun x -> x.Error)
-        |> String.concat ", "
-        |> Some
+        let mutable error = ""
+        for e in errors do
+            let sep = if error = "" then "" else ", " 
+            error <- error + sep + e.Error
+        Some error
 
     match msg with
     | EmailChanged newEmail -> 

@@ -45,10 +45,11 @@ module ModelUpdate =
     let updatePartial (postContact: Model -> Cmd<Msg>) =
         fun (msg : Msg) (currentModel : Model) -> // : Model * Cmd<Msg>
             let printErrors errors = 
-                errors 
-                |> List.map (fun x -> x.Error)
-                |> String.concat ", "
-                |> Some
+                let mutable error = ""
+                for e in errors do
+                    let sep = if error = "" then "" else ", " 
+                    error <- error + sep + e.Error
+                Some error
             
             let validateNewEmailOrPhone email phone = 
                 match validateContactDetails {email = email; phone = phone} with

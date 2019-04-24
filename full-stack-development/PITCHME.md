@@ -16,7 +16,6 @@ F# hobbiest
 - MVU Pattern
 - SAFE
 - Fabulous
-- type providers
 
 ---?include=full-stack-development/md/fs-101.md
 

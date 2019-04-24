@@ -1,7 +1,6 @@
 namespace SharedClient
-open Shared
 open Shared.DataTransfer
-open Shared.Responses
+open Shared.Domain
 open Shared.Validation
 
 #if MOBILE
@@ -43,16 +42,11 @@ module ModelUpdate =
         initialModel, Cmd.none
 
     let updatePartial (postContact: Model -> Cmd<Msg>) =
-        fun (msg : Msg) (currentModel : Model) -> // : Model * Cmd<Msg>
-            let printErrors errors = 
-                let mutable error = ""
-                for e in errors do
-                    let sep = if error = "" then "" else ", " 
-                    error <- error + sep + e.Error
-                Some error
-            
+
+        fun (msg : Msg) (currentModel : Model) ->
+
             let validateNewEmailOrPhone email phone = 
-                match validateContactDetails {email = email; phone = phone} with
+                match validateContactDetails (Email email) (Phone phone) with
                 | Passed -> None
                 | Failed errors -> printErrors errors
             

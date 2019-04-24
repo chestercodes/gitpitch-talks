@@ -2,6 +2,7 @@
 namespace Mobile
 
 open SharedClient.ModelUpdate
+open Shared.Domain
 open Shared.Validation
 open Fabulous.Core
 open Fabulous.DynamicViews
@@ -13,7 +14,7 @@ module App =
     let postContact (model:Model) =
         async {
             do! Async.Sleep 200
-            let validationResult = validateContactDetails { email = model.Email; phone = model.Phone }
+            let validationResult = validateContactDetails (Email model.Email) (Phone model.Phone)
             match validationResult with
             | Passed -> return GotResponse(Success { Id = Guid.NewGuid().ToString()})
             | Failed errors -> return GotResponse(ValidationError ({errors = errors}))

@@ -7,7 +7,7 @@ open Fable.PowerPack.Fetch
 open Fable.Core.JsInterop
 open Shared.DataTransfer
 open SharedClient.ModelUpdate
-open Shared.Responses
+open Shared.Domain
 open Fulma
 
 
@@ -27,7 +27,7 @@ let tryPost<'T> (url: string) (record:'T) (properties: RequestProperties list) =
 
 let postContact model =
     let promise m = 
-        tryPost "/api/contact" { email = m.Email; phone = m.Phone } []
+        tryPost "/api/contact" { email = (Email m.Email); phone = (Phone m.Phone)} []
         |> Fable.PowerPack.Promise.bind (fun result -> 
             match result with
             | Ok response -> 

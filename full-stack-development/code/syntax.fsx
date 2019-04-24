@@ -1,7 +1,7 @@
 // adapted from https://fsharpforfunandprofit.com/posts/fsharp-in-60-seconds/
 let myInt = 5
 let myFloat = 3.14
-let ``a string value`` = "hello"
+let myString = "hello"
 
 // mutability requires mutable keyword and special assignment operator
 let mutable counter = 0
@@ -26,23 +26,11 @@ let add    // function name
 
 let three = add 1 2
 
-// to define a multiline function, just use indents. No semicolons needed.
-let evens list =
-   let isEven x = x % 2 = 0  // Define "isEven" as an inner ("nested") function
-   List.filter isEven list   // List.filter is like LINQ's Where
-
 // pipe operator can be used with anonymous function
-let evens2 list =
+let evens list =
    list 
    |> List.filter (fun x -> x % 2 = 0) 
 
 // Tuple types are pairs, triples, etc. Tuples use commas.
 let twoTuple = 1, 2
 let threeTuple = ("a", 2, true)
-
-// typed string interpolation through sprintf
-let interpolated = sprintf "Name is %s"  "Chester"
-
-// The printf/printfn functions are similar to Console.Write/WriteLine functions.
-printfn "Printing an int %i, a float %f, a bool %b, other %A" 
-   1   2.0   true   [1;2;3;4]

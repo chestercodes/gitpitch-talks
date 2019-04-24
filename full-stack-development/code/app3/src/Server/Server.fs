@@ -9,7 +9,7 @@ open Saturn
 
 open Shared.Validation
 open Shared.DataTransfer
-open Shared.Responses
+open Shared.Domain
 
 let tryGetEnv = System.Environment.GetEnvironmentVariable >> function null | "" -> None | x -> Some x
 
@@ -20,9 +20,9 @@ let port = "SERVER_PORT" |> tryGetEnv |> Option.map uint16 |> Option.defaultValu
 let contactPost next (ctx: HttpContext) =
     task {
         try
-            let! contactDetails =  ctx.BindModelAsync<ContactDetails>()
-            System.Threading.Thread.Sleep(1000)
-            match validateContactDetails contactDetails with
+            let! contactDetails =  ctx.BindModelAsync<UnvalContactDetails>()
+            System.Threading.Thread.Sleep(500)
+            match validateContactDetails contactDetails.email contactDetails.phone with
             | Passed -> 
                 return! json ({ Id = Guid.NewGuid().ToString() }) next ctx
             | Failed errors -> 

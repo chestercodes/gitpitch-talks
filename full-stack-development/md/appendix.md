@@ -1,49 +1,17 @@
+### F# 101 - Type signatures
 
-F#
+functional programmers converse in type signatures.
 
-```fsharp
-let name = "Chester" 
-```
+---?code=full-stack-development/code/typesig.fsx&lang=fs
 
-JavaScript
-
-```javascript
-export const name = "Chester"; 
-```
-
----
-
-F#
-
-```fsharp
-let addOne arg1 = 
-    arg1 + 1
-```
-
-JavaScript
-
-```javascript
-export function addOne(arg1) {
-  return arg1 + 1;
-}
-```
+@[1-2](Tuple type signature)
+@[4-6](simple function signature)
+@[8-11](simple function signature)
+@[4-6,13-14](with C# equivalent)
+@[8-11,16-18](with C# equivalent)
 
 ---
 
-F#
-
-```fsharp
-let aRandomInt = (new System.Random()).Next(5)
-```
-
-JavaScript
-
-```javascript
-import { randomNext } from "fable-library/Util.js";
-export const aRandomInt = randomNext(0, 5);
-```
-
----
 
 Native JavaScript
 
@@ -102,4 +70,30 @@ export function Contact$reflection() {return union(
         "Test.Contact", [], Contact, 
         () => [["Email", [string]], ["Phone", [string]]] ); }
 ```
+
+---
+
+### Saturn - concepts
+
+- Application - start/end of request, configuration, hands to router
+
+- Router - define pipelines to pass requests, parses requests and dispatches to controller
+
+- Controller - contains actions to handle requests, redirect, return views or data
+
+- Views - render templates
+
+
+---
+
+---?code=full-stack-development/code/app2/src/Shared/Shared.fs&lang=fs
+@[1-9](Define Shared namespace and DataTransfer module. Can be accessed at Shared.DataTransfer)
+@[12-14](Validation module contains Record for storing error)
+@[16-18](ValidationResults is a discriminated union. Can either be Passed or Failed which is a list of ValidationError)
+@[20-27](validation functions to return an option of ValidationError )
+@[52-59](validation function takes ContactDetails, applies all of validation functions)
+@[61-63](pattern matching returns Passed if there are no Some<ValidationError> and Failed of the errors if they exist.)
+@[66-70](Define validation response for validation errors returned from server)
+
+--- 
 

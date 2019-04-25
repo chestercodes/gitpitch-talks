@@ -7,7 +7,7 @@
 
 - View - a way to view your state as HTML
 
-Started by Elm, popularised by redux
+Started by Elm, popularised by react/redux
 
 ---
 

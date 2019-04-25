@@ -60,7 +60,7 @@ https://docs.microsoft.com/en-gb/xamarin/get-started/quickstarts/styling?pivots=
 
 ---
 
-### Code sharing update
+### Code sharing
 
 | Module       | Server | Browser |  iOS  | Android |
 | ------------ | ------ | ------  |------ |-------- |

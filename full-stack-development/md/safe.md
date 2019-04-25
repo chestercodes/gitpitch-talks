@@ -40,8 +40,7 @@ MVU pattern library.
 ## Babel
 
 - JavaScript evolves faster than browser usage
-- Babel is a JavaScript transpiler
-- JavaScript/Other -> legacy browser compatible JS
+- transpiles modern JavaScript to legacy browser compatible JS
 
 ```javascript
 // ES6
@@ -138,7 +137,6 @@ gather user contact information. Want to have:
 - Validation on server and return contact guid if valid.
 - If not valid then display errors.
 
-Lets make an app!
 
 ---?code=full-stack-development/code/scripts/CreateSafeApp.ps1&lang=ps
 
@@ -146,3 +144,6 @@ Lets make an app!
 
 ![Files](full-stack-development/assets/img/SafeNewFilesAnnotated.jpg)
 
+---
+
+### Code demo

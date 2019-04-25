@@ -9,7 +9,7 @@ module Domain =
     
     type UnvalPhone = Phone of string
     
-    type ValidationError = { Tag: string; Error: string }
+    type ValidationError = { Field: string; Error: string }
     
     type ValidationResults = 
         | Passed
@@ -20,10 +20,10 @@ module Validation =
     open Domain
 
     let emailValidationError message =
-        Some { Tag = "email"; Error = message }
+        Some { Field = "email"; Error = message }
 
     let phoneValidationError message =
-        Some { Tag = "phone"; Error = message }
+        Some { Field = "phone"; Error = message }
 
     let emailCantBeBlank (Email email, Phone _) =
         if String.IsNullOrWhiteSpace email then

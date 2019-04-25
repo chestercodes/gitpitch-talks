@@ -22,7 +22,7 @@ let tryPost<'T> (url: string) (record:'T) (properties: RequestProperties list) =
         if response.Ok then 
             Ok response
         else 
-            Error response
+            FSharp.Core.Error response
     )
 
 let postContact model =
@@ -34,7 +34,7 @@ let postContact model =
                 response.json<ContactDetailsResult>()
                     .``then``(Success)
                     .``catch``(fun x -> Unknown (x.ToString()))
-            | Error response ->
+            | FSharp.Core.Error response ->
                 match response.Status with
                 | 422 -> response.json<FourTwoTwo>()
                             .``then``(ValidationError)
@@ -48,16 +48,11 @@ let postContact model =
 
 let view (model : Model) (dispatch : Msg -> unit) =
 
-    let errorOrBlankDiv (model : Model) =
-        match model.ErrorMessage with
-        | Some error -> Heading.h4 [] [str(error)]
-        | None -> div [] []
-
-    let loadingOrBlankDiv (model : Model) =
-        if model.Loading then
-            Heading.h4 [] [str("Loading...")]
-        else 
-            div [] []
+    let getStatus (model : Model) =
+        match model.Status with
+        | Error error -> Heading.h4 [] [str(error)]
+        | AwaitingResponse -> Heading.h4 [] [str("Loading...")]
+        | _ -> div [] []
 
     div []
         [ 
@@ -71,9 +66,9 @@ let view (model : Model) (dispatch : Msg -> unit) =
                     Content.content [ Content.Modifiers [ Modifier.TextAlignment (Screen.All, TextAlignment.Centered) ] ]
                         [ Heading.h3 [] [ str ("Post your details: ") ] ]
                     (
-                        match model.SubmittedId with
-                        | Some id -> Text.span [] [ str( "Thank you: " + id ) ]
-                        | None -> 
+                        match model.Status with
+                        | SubmittedOk id -> Text.span [] [ str( "Thank you: " + id ) ]
+                        | _ -> 
                             div [] [
                                 Columns.columns [] [ 
                                         Column.column [] [ Text.span [] [ str( "Email:" ) ] ]
@@ -88,12 +83,12 @@ let view (model : Model) (dispatch : Msg -> unit) =
                                 Button.button [ Button.IsFullWidth; Button.Color IsPrimary; Button.OnClick (fun _ -> dispatch Submit) ]
                                     [ str "Submit" ]
 
-                                loadingOrBlankDiv model
-                                errorOrBlankDiv model
+                                getStatus model
                             ]
                     )
                 ]
         ]
+
 
 #if DEBUG
 open Elmish.Debug

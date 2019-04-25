@@ -76,7 +76,7 @@ module Validation =
         for e in errors do
             let sep = if error = "" then "" else ", " 
             error <- error + sep + e.Error
-        Some error
+        error
 
 
 module DataTransfer =

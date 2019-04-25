@@ -13,11 +13,11 @@ open Elmish
 module ModelUpdate =
 
     type SubmitStatus =
+        | ToBeSubmitted
+        | AwaitingResponse
         | SubmittedOk of string
         | Error of string
-        | Loading
-        | AwaitingSubmit
-
+        
     type Model = { 
         Email: string
         Phone: string 
@@ -39,7 +39,7 @@ module ModelUpdate =
         let initialModel = { 
             Email = ""
             Phone = ""
-            Status = AwaitingSubmit }
+            Status = ToBeSubmitted }
 
         initialModel, Cmd.none
 
@@ -49,7 +49,7 @@ module ModelUpdate =
         
             let getStatusFromData email phone =
                 match validateContactDetails (Email email) (Phone phone) with
-                | Passed -> AwaitingSubmit
+                | Passed -> ToBeSubmitted
                 | Failed errors -> Error(printErrors errors)
 
             match msg with
@@ -61,7 +61,7 @@ module ModelUpdate =
             
             | Submit ->
                 let cmd = postContact currentModel
-                { currentModel with Status = Loading }, cmd
+                { currentModel with Status = AwaitingResponse }, cmd
             
             | GotResponse response ->
                 match response with

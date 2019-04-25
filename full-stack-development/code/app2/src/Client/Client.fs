@@ -12,15 +12,17 @@ open Shared.Domain
 open Shared.Validation
 open Fable.PowerPack
 
-
+type SubmitStatus =
+    | ToBeSubmitted
+    | AwaitingResponse
+    | SubmittedOk of string
+    | Error of string
+    
 type Model = { 
     Email: string
     Phone: string 
-    SubmittedId: string option 
-    Loading: bool
-    ErrorMessage: string option
+    Status: SubmitStatus
     }
-
 
 type ApiResponse = 
     | Success of ContactDetailsResult
@@ -33,14 +35,11 @@ type Msg =
     | Submit
     | GotResponse of ApiResponse
 
-
 let init () : Model * Cmd<Msg> =
     let initialModel = { 
         Email = ""
         Phone = ""
-        SubmittedId = None
-        Loading = false
-        ErrorMessage = None }
+        Status = ToBeSubmitted }
 
     initialModel, Cmd.none
 
@@ -55,7 +54,7 @@ let tryPost<'T> (url: string) (record:'T) (properties: RequestProperties list) =
         if response.Ok then 
             Ok response
         else 
-            Error response
+            FSharp.Core.Error response
     )
 
 let postContact model =
@@ -67,7 +66,7 @@ let postContact model =
                 response.json<ContactDetailsResult>()
                     .``then``(Success)
                     .``catch``(fun x -> Unknown (x.ToString()))
-            | Error response ->
+            | FSharp.Core.Error response ->
                 match response.Status with
                 | 422 -> response.json<FourTwoTwo>()
                             .``then``(ValidationError)
@@ -81,40 +80,43 @@ let postContact model =
 
 let update (msg : Msg) (currentModel : Model) : Model * Cmd<Msg> =
 
+    let getStatus email phone =
+        ToBeSubmitted
+        // match validateContactDetails (Email email) (Phone phone) with
+        // | Passed -> AwaitingSubmit
+        // | Failed errors -> Error(printErrors errors)
+        
+
     match msg with
     | EmailChanged newEmail -> 
-        { currentModel with Email = newEmail }, Cmd.none
+        { currentModel with Email = newEmail; Status = getStatus newEmail currentModel.Phone }, Cmd.none
     
     | PhoneChanged newPhone -> 
-        { currentModel with Phone = newPhone }, Cmd.none
+        { currentModel with Phone = newPhone; Status = getStatus currentModel.Email newPhone }, Cmd.none
     
     | Submit ->
         let cmd = postContact currentModel
-        { currentModel with Loading = true; ErrorMessage = None }, cmd
+        { currentModel with Status = AwaitingResponse }, cmd
     
     | GotResponse response ->
         match response with
         | Success resp -> 
-            { currentModel with Loading = false; ErrorMessage = None; SubmittedId = Some resp.Id }, Cmd.none
+            { currentModel with Status = SubmittedOk resp.Id }, Cmd.none
         
         | ValidationError four22 ->
-            { currentModel with Loading = false; ErrorMessage = printErrors four22.errors }, Cmd.none
+            { currentModel with Status = Error(printErrors four22.errors) }, Cmd.none
         
         | Unknown error -> 
-            { currentModel with Loading = false; ErrorMessage = Some error }, Cmd.none
+            { currentModel with Status = Error error }, Cmd.none
+
     
 let view (model : Model) (dispatch : Msg -> unit) =
 
-    let errorOrBlankDiv (model : Model) =
-        match model.ErrorMessage with
-        | Some error -> Heading.h4 [] [str(error)]
-        | None -> div [] []
-
-    let loadingOrBlankDiv (model : Model) =
-        if model.Loading then
-            Heading.h4 [] [str("Loading...")]
-        else 
-            div [] []
+    let getStatus (model : Model) =
+        match model.Status with
+        | Error error -> Heading.h4 [] [str(error)]
+        | AwaitingResponse -> Heading.h4 [] [str("Loading...")]
+        | _ -> div [] []
 
     div []
         [ 
@@ -128,9 +130,9 @@ let view (model : Model) (dispatch : Msg -> unit) =
                     Content.content [ Content.Modifiers [ Modifier.TextAlignment (Screen.All, TextAlignment.Centered) ] ]
                         [ Heading.h3 [] [ str ("Post your details: ") ] ]
                     (
-                        match model.SubmittedId with
-                        | Some id -> Text.span [] [ str( "Thank you: " + id ) ]
-                        | None -> 
+                        match model.Status with
+                        | SubmittedOk id -> Text.span [] [ str( "Thank you: " + id ) ]
+                        | _ -> 
                             div [] [
                                 Columns.columns [] [ 
                                         Column.column [] [ Text.span [] [ str( "Email:" ) ] ]
@@ -145,8 +147,7 @@ let view (model : Model) (dispatch : Msg -> unit) =
                                 Button.button [ Button.IsFullWidth; Button.Color IsPrimary; Button.OnClick (fun _ -> dispatch Submit) ]
                                     [ str "Submit" ]
 
-                                loadingOrBlankDiv model
-                                errorOrBlankDiv model
+                                getStatus model
                             ]
                     )
                 ]

@@ -22,7 +22,7 @@ let mutable private arr = [| 1; 2; 3; 4; 5 |]
 let str = Fable.Import.JS.JSON.stringify arr 
 
 Fable.Import.JS.console.log(str)
-                                                                                                   //
+                                       //
 ```
 
 ```javascript
@@ -32,7 +32,7 @@ let arr = new Int32Array([1, 2, 3, 4, 5]);
 export const str = JSON.stringify(arr);
 
 console.log(str);
-                                                                                                   //
+                                            //
 ```
 
 ---

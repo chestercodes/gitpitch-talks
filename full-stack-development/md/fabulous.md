@@ -47,7 +47,6 @@ https://docs.microsoft.com/en-gb/xamarin/get-started/quickstarts/styling?pivots=
 
 - View library to create Xamarin.Forms components
 
----
 
 ---?code=full-stack-development/code/scripts/CreateFabApp.ps1&lang=ps
 
@@ -65,7 +64,7 @@ https://docs.microsoft.com/en-gb/xamarin/get-started/quickstarts/styling?pivots=
 
 | Module       | Server | Browser |  iOS  | Android |
 | ------------ | ------ | ------  |------ |-------- |
+| Domain       |  yes   |   yes   |  yes  |   yes   |
 | DataTransfer |  yes   |   yes   |  yes  |   yes   |
 | Validation   |  yes   |   yes   |  yes  |   yes   |
-| Responses    |  yes   |   yes   |  yes  |   yes   |
 | ModelUpdate  |        |   yes   |  yes  |   yes   |

@@ -9,7 +9,7 @@ let mySecondList = [
    1
    2
 ]
-let areSame = myList = mySecondList // true
+
 
 
 // The "let" keyword also defines a named function.

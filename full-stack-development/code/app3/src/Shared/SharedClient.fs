@@ -12,12 +12,16 @@ open Elmish
 
 module ModelUpdate =
 
+    type SubmitStatus =
+        | SubmittedOk of string
+        | Error of string
+        | Loading
+        | AwaitingSubmit
+
     type Model = { 
         Email: string
         Phone: string 
-        SubmittedId: string option 
-        Loading: bool
-        ErrorMessage: string option
+        Status: SubmitStatus
         }
 
     type ApiResponse = 
@@ -35,39 +39,37 @@ module ModelUpdate =
         let initialModel = { 
             Email = ""
             Phone = ""
-            SubmittedId = None
-            Loading = false
-            ErrorMessage = None }
+            Status = AwaitingSubmit }
 
         initialModel, Cmd.none
 
     let updatePartial (postContact: Model -> Cmd<Msg>) =
 
         fun (msg : Msg) (currentModel : Model) ->
-
-            let validateNewEmailOrPhone email phone = 
+        
+            let getStatusFromData email phone =
                 match validateContactDetails (Email email) (Phone phone) with
-                | Passed -> None
-                | Failed errors -> printErrors errors
-            
+                | Passed -> AwaitingSubmit
+                | Failed errors -> Error(printErrors errors)
+
             match msg with
             | EmailChanged newEmail -> 
-                { currentModel with Email = newEmail; ErrorMessage = (validateNewEmailOrPhone newEmail currentModel.Phone) }, Cmd.none
+                { currentModel with Email = newEmail; Status = getStatusFromData newEmail currentModel.Phone }, Cmd.none
             
             | PhoneChanged newPhone -> 
-                { currentModel with Phone = newPhone; ErrorMessage = (validateNewEmailOrPhone currentModel.Email newPhone) }, Cmd.none
+                { currentModel with Phone = newPhone; Status = getStatusFromData currentModel.Email newPhone }, Cmd.none
             
             | Submit ->
                 let cmd = postContact currentModel
-                { currentModel with Loading = true; ErrorMessage = None }, cmd
+                { currentModel with Status = Loading }, cmd
             
             | GotResponse response ->
                 match response with
                 | Success resp -> 
-                    { currentModel with Loading = false; ErrorMessage = None; SubmittedId = Some resp.Id }, Cmd.none
+                    { currentModel with Status = SubmittedOk resp.Id }, Cmd.none
                 
                 | ValidationError four22 ->
-                    { currentModel with Loading = false; ErrorMessage = printErrors four22.errors }, Cmd.none
+                    { currentModel with Status = Error(printErrors four22.errors) }, Cmd.none
                 
                 | Unknown error -> 
-                    { currentModel with Loading = false; ErrorMessage = Some error }, Cmd.none
+                    { currentModel with Status = Error error }, Cmd.none

@@ -25,8 +25,11 @@ module App =
         View.ContentPage(
           content = View.StackLayout(padding = 20.0, verticalOptions = LayoutOptions.Center,
             children =
-                if model.SubmittedId.IsNone then
-                    [
+                match model.Status with
+                | SubmittedOk id -> [
+                        View.Label(text = sprintf "Thank you: %s" id )
+                    ]
+                | _ -> [
                         View.Label(text = "Email")
                         View.Entry(text = "", textChanged = (fun args -> dispatch (EmailChanged(args.NewTextValue))))
 
@@ -35,11 +38,8 @@ module App =
 
                         View.Button(text = "Submit", command = (fun () -> dispatch Submit), horizontalOptions = LayoutOptions.Center)
 
-                        View.Label(text=(if model.ErrorMessage.IsSome then model.ErrorMessage.Value else ""), textColor = Xamarin.Forms.Color.Red)
-                    ]
-                else [
-                    View.Label(text = if model.SubmittedId.IsSome then sprintf "Thank you: %s" model.SubmittedId.Value else "")
-                ]
+                        View.Label(text=(match model.Status with | Error error -> error | _ -> ""), textColor = Xamarin.Forms.Color.Red)
+                ] 
             )
         )
 

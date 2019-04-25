@@ -47,17 +47,17 @@ module ModelUpdate =
 
         fun (msg : Msg) (currentModel : Model) ->
         
-            let getStatusFromData email phone =
+            let getStatus email phone =
                 match validateContactDetails (Email email) (Phone phone) with
                 | Passed -> ToBeSubmitted
                 | Failed errors -> Error(printErrors errors)
 
             match msg with
             | EmailChanged newEmail -> 
-                { currentModel with Email = newEmail; Status = getStatusFromData newEmail currentModel.Phone }, Cmd.none
+                { currentModel with Email = newEmail; Status = getStatus newEmail currentModel.Phone }, Cmd.none
             
             | PhoneChanged newPhone -> 
-                { currentModel with Phone = newPhone; Status = getStatusFromData currentModel.Email newPhone }, Cmd.none
+                { currentModel with Phone = newPhone; Status = getStatus currentModel.Email newPhone }, Cmd.none
             
             | Submit ->
                 let cmd = postContact currentModel

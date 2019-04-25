@@ -3,14 +3,14 @@ let myInt = 5
 let myFloat = 3.14
 let myString = "hello"
 
-// mutability requires mutable keyword and special assignment operator
-let mutable counter = 0
-counter <- counter + 1
+let myList =  [ 1; 2 ]
+let myArray = [| 1; 2; 3; |]
+let mySecondList = [
+   1
+   2
+]
+let areSame = myList = mySecondList // true
 
-let twoToFive = [ 2; 3; 4; 5 ]        // create a list.
-let oneToFive = 1 :: twoToFive        // :: creates list with new 1st element
-let zeroToFive = [ 0; 1 ] @ twoToFive // @ concats two lists
-let anArray = [| 2; 3; 4; 5 |]        // array
 
 // The "let" keyword also defines a named function.
 let square x = x * x  // Note that no parens are used.

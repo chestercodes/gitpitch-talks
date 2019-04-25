@@ -33,7 +33,7 @@ F# hobbiest
 
 SAFE and Fabulous allow code sharing across platforms
 
-DTOs, validation, server responses, some app logic can be shared.
+Domain, DTOs, Validation, some app logic can be shared.
 
 ---
 

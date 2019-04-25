@@ -147,3 +147,13 @@ gather user contact information. Want to have:
 ---
 
 ### Code demo
+
+---
+
+### Code sharing
+
+| Module       | Server | Browser |
+| ------------ | ------ | ------  |
+| Domain       |  yes   |   yes   |
+| DataTransfer |  yes   |   yes   |
+| Validation   |  yes   |   yes   |

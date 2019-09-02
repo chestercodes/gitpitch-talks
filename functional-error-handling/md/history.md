@@ -24,6 +24,8 @@ December 1981 -> BBC Micro
 
 [https://xkcd.com/292/](https://xkcd.com/292/)
 
+unstructured programming features aren't used much in modern programming, with one `Exception`...
+
 ---
 
-`goto`style programming isn't used much 
+

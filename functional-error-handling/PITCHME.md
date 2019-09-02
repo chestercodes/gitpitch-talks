@@ -6,5 +6,7 @@
 - Task
 
 
+---?include=functional-error-handling/md/history.md
+
 ---?include=functional-error-handling/md/task.md
 

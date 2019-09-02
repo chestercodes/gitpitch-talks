@@ -6,3 +6,5 @@ Want to create a web api that:
 - parses and counts amount of transactions by John
 - returns 200 with json of result
 
+![Task](functional-error-handling/assets/img/Task.png)
+

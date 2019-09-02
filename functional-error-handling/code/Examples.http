@@ -61,4 +61,37 @@ content-type: application/json
 {
 }
 
+
+### F# version
+
+GET http://localhost:5000/api/johnamount/something HTTP/1.1
+content-type: application/json
+
+{
+}
+
+###
+
+GET http://localhost:5000/api/johnamount/UnauthorisedSftp HTTP/1.1
+content-type: application/json
+
+{
+}
+
+###
+
+GET http://localhost:5000/api/johnamount/FileMissingOnSftp HTTP/1.1
+content-type: application/json
+
+{
+}
+
+###
+
+GET http://localhost:5000/api/johnamount/FileDoesntParse HTTP/1.1
+content-type: application/json
+
+{
+}
+
 ###

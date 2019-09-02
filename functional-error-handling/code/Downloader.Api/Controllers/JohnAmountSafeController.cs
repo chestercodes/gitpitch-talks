@@ -43,9 +43,9 @@ namespace Downloader.Api.Controllers
                         case FileDoesntExist _:
                             return NotFound();
                         case FileDoesntParse _:
-                            return this.BadRequest();
+                            return this.UnprocessableEntity();
                         default:
-                            return this.BadRequest();
+                            throw new NotImplementedException($"Not implemented program error type {error.GetType().FullName}");
                     }
                 });
         }

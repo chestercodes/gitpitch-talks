@@ -1,4 +1,4 @@
-﻿using Downloader.Api.Shared;
+﻿using Downloader.Api.Other;
 
 namespace Downloader.Api.Unsafe
 {
@@ -15,9 +15,9 @@ namespace Downloader.Api.Unsafe
             {
                 return fileParser.Parse(content);
             }
-            catch
+            catch (Exception)
             {
-                throw new Exception(Errors.FileDoesntParse);
+                throw new FileDoesntParseException();
             }
         }
     }

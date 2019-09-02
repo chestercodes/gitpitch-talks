@@ -33,15 +33,15 @@ namespace Downloader.Api.Controllers
 
                     return Ok(amount);
                 }
-                catch (Exception ex) when (ex.Message == Errors.FileDoesntParse)
+                catch (FileDoesntParseException)
                 {
-                    return BadRequest();
+                    return UnprocessableEntity();
                 }
-            } catch (Exception ex) when (ex.Message == Errors.UnauthorisedSftp)
+            } catch (SftpUnauthorisedException)
             {
                 return Unauthorized();
             }
-            catch (Exception ex) when (ex.Message == Errors.FileMissingOnSftp)
+            catch (FileDoesntExistException)
             {
                 return NotFound();
             }

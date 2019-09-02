@@ -6,40 +6,34 @@
         {
         }
 
-        public static Result<TOk, TError> ToOk(TOk item) => new Ok(item);
+        public static Result<TOk, TError> Ok(TOk item) => new OkImpl(item);
 
-        public static Result<TOk, TError> ToError(TError item) => new Error(item);
+        public static Result<TOk, TError> Error(TError item) => new ErrorImpl(item);
 
-        public bool IsOk => this is Ok;
+        public bool IsOk => this is OkImpl;
 
-        public bool IsError => this is Error;
+        public OkImpl AsOk => this as OkImpl;
 
-        public Ok AsOk => this as Ok;
+        public ErrorImpl AsError => this as ErrorImpl;
 
-        public Error AsError => this as Error;
-
-        public class Ok : Result<TOk, TError>
+        public class OkImpl : Result<TOk, TError>
         {
-            internal Ok(TOk item)
+            internal OkImpl(TOk item)
             {
                 Item = item;
             }
 
             public TOk Item { get; }
-
-            public static implicit operator TOk(Ok success) => success.Item;
         }
 
-        public class Error : Result<TOk, TError>
+        public class ErrorImpl : Result<TOk, TError>
         {
-            internal Error(TError item)
+            internal ErrorImpl(TError item)
             {
                 Item = item;
             }
 
             public TError Item { get; }
-
-            public static implicit operator TError(Error failure) => failure.Item;
         }
     }
 }

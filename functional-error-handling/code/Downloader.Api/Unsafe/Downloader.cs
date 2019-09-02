@@ -2,20 +2,18 @@
 
 namespace Downloader.Api.Unsafe
 {
-    using System;
-
     public class Downloader
     {
         public string GetFile(string fileName)
         {
             if(fileName == FileNames.UnauthorisedSftp)
             {
-                throw new Exception(Errors.UnauthorisedSftp);
+                throw new SftpUnauthorisedException();
             }
 
             if (fileName == FileNames.FileMissingOnSftp)
             {
-                throw new Exception(Errors.FileMissingOnSftp);
+                throw new FileDoesntExistException();
             }
 
             if(fileName == FileNames.FileDoesntParse)

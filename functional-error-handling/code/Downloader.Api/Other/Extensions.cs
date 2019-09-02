@@ -10,7 +10,7 @@ namespace Downloader.Api.Other
         {
             return twoTrackInput.IsOk
                 ? switchFunction(twoTrackInput.AsOk.Item)
-                : Result<TB, TC>.ToError(twoTrackInput.AsError.Item);
+                : Result<TB, TC>.Error(twoTrackInput.AsError.Item);
         }
 
         public static Func<TA, Result<TC, TD>> Bind<TA, TB, TC, TD>(
@@ -25,8 +25,8 @@ namespace Downloader.Api.Other
             Func<TA, TB> oneTrackFunction)
         {
             return twoTrackInput.IsOk
-                ? Result<TB, TC>.ToOk(oneTrackFunction.Invoke(twoTrackInput.AsOk.Item))
-                : Result<TB, TC>.ToError(twoTrackInput.AsError.Item);
+                ? Result<TB, TC>.Ok(oneTrackFunction.Invoke(twoTrackInput.AsOk.Item))
+                : Result<TB, TC>.Error(twoTrackInput.AsError.Item);
         }
 
 

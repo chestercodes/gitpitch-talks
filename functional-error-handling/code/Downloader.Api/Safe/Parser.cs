@@ -1,34 +1,26 @@
-﻿using Downloader.Api.Shared;
+﻿using System.Linq;
+using Result = Downloader.Api.Other.Result<System.Collections.Generic.IEnumerable<Downloader.Api.Other.PersonAmount>, Downloader.Api.Safe.IJohnAmountError>;
 
 namespace Downloader.Api.Safe
 {
     using Other;
-    using System.Collections.Generic;
     
     public class Parser
     {
-        public Result<IEnumerable<PersonAmount>, IJohnAmountError> Parse(string contents)
+        public Result Parse(string contents)
         {
             var fileParser = new FileParser();
 
             try
             {
-                return Success(fileParser.Parse(contents));
+                var personAmounts = fileParser.Parse(contents).ToList();
+
+                return Result.Ok(personAmounts);
             }
             catch
             {
-                return FailWith(new FileDoesntParse());
+                return Result.Error(new FileDoesntParse());
             }
-        }
-
-        private Result<IEnumerable<PersonAmount>, IJohnAmountError> FailWith(IJohnAmountError error)
-        {
-            return Result<IEnumerable<PersonAmount>, IJohnAmountError>.ToError(error);
-        }
-
-        private Result<IEnumerable<PersonAmount>, IJohnAmountError> Success(IEnumerable<PersonAmount> result)
-        {
-            return Result<IEnumerable<PersonAmount>, IJohnAmountError>.ToOk(result);
         }
     }
 }

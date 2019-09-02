@@ -1,0 +1,64 @@
+GET http://localhost:29701/api/johnamount/something HTTP/1.1
+content-type: application/json
+
+{
+}
+
+###
+
+GET http://localhost:29701/api/johnamount/UnauthorisedSftp HTTP/1.1
+content-type: application/json
+
+{
+}
+
+###
+
+GET http://localhost:29701/api/johnamount/FileMissingOnSftp HTTP/1.1
+content-type: application/json
+
+{
+}
+
+###
+
+GET http://localhost:29701/api/johnamount/FileDoesntParse HTTP/1.1
+content-type: application/json
+
+{
+}
+
+###
+
+
+GET http://localhost:29701/api/johnamountsafe/something HTTP/1.1
+content-type: application/json
+
+{
+}
+
+###
+
+GET http://localhost:29701/api/johnamountsafe/UnauthorisedSftp HTTP/1.1
+content-type: application/json
+
+{
+}
+
+###
+
+GET http://localhost:29701/api/johnamountsafe/FileMissingOnSftp HTTP/1.1
+content-type: application/json
+
+{
+}
+
+###
+
+GET http://localhost:29701/api/johnamountsafe/FileDoesntParse HTTP/1.1
+content-type: application/json
+
+{
+}
+
+###

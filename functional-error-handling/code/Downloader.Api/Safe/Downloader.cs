@@ -10,20 +10,30 @@ namespace Downloader.Api.Safe
         {
             if (fileName == FileNames.UnauthorisedSftp)
             {
-                return FailWith(new SftpUnauthorised());
+                return Error(new SftpUnauthorised());
             }
 
             if (fileName == FileNames.FileMissingOnSftp)
             {
-                return FailWith(new FileDoesntExist());
+                return Error(new FileDoesntExist());
             }
 
-            return Result<string, IJohnAmountError>.ToOk(FileContent.ValidFile);
+            if (fileName == FileNames.FileDoesntParse)
+            {
+                return Ok(FileContent.InvalidFile);
+            }
+
+            return Ok(FileContent.ValidFile);
         }
 
-        private Result<string, IJohnAmountError> FailWith(IJohnAmountError error)
+        private static Result<string, IJohnAmountError> Ok(string content)
         {
-            return Result<string, IJohnAmountError>.ToError(error);
+            return Result<string, IJohnAmountError>.Ok(content);
+        }
+
+        private Result<string, IJohnAmountError> Error(IJohnAmountError error)
+        {
+            return Result<string, IJohnAmountError>.Error(error);
         }
     }
 }

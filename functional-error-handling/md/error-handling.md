@@ -1,20 +1,10 @@
 ### Exceptions
 
-```csharp
-try
-{
-    string[] arr = { };
+---?code=functional-error-handling/code/ExceptionCode.cs&lang=cs
 
-    var thing = arr.GetValue(0);
-}
-catch (ArgumentOutOfRangeException)
-{
-    Console.WriteLine("Out of range!");
-}
-catch (Exception)
-{
-    Console.WriteLine("Errr, something bad happened!");
-}
-```
+@[3-5](Create array and retrieve value)
+@[7-14](Jumps to where?)
+@[11-14](Trick question, throws an IndexOutOfRangeException)
+
 
 ---

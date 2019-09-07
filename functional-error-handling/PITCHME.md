@@ -1,8 +1,4 @@
-## F#unctional error handling in C
-
----
-
-- Task
+## F#unctional error handling in C# ##
 
 ---?include=functional-error-handling/md/history.md
 

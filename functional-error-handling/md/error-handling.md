@@ -19,10 +19,10 @@ Another way?
 
 Wrap dangerous operation in data structure, called `Result` type.
 
-`Result` can be one of 2 types:
+`Result` wraps a value of one of 2 types:
 
 - `TOk` if the operation was ok
-- `TError` if there was an error to handle.
+- `TError` if there was an error
 
-
+--- 
 

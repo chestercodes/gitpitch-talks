@@ -30,7 +30,20 @@ Programs become a pipeline of `Result<TOk,TError>` types.
 
 HttpRequest -> `Result<TOk1,TError>` -> `Result<TOk2,TError>` -> ... -> HttpResponse
 
-First operation creates `Result` which is unwrapped to produce response, with
+---
 
-- `TOk` -> 200
-- `TError` -> 400s, 500
+First operation creates `Result` 
+
+![Pipeline1](functional-error-handling/assets/img/Pipeline1.png)
+
+---
+
+Second operation takes `Result` and applies function if `TOk`, does nothing if `TError`
+
+![Pipeline2](functional-error-handling/assets/img/Pipeline2.png)
+
+---
+
+TODO
+
+![Pipeline3](functional-error-handling/assets/img/Pipeline3.png)

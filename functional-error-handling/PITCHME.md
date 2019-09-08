@@ -5,3 +5,5 @@
 ---?include=functional-error-handling/md/error-handling.md
 
 ---?include=functional-error-handling/md/task.md
+
+---?include=functional-error-handling/md/summary.md

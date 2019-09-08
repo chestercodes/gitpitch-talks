@@ -12,6 +12,7 @@
 
 - Exceptions are gotos, but worse, invisible gotos.
 - Exceptions create many invisible exit points.
+- Errors not explicit in type system
 
 Another way?
 

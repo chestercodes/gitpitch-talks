@@ -27,10 +27,7 @@ Things that can go wrong:
 
 Demo time!
 
-Checklist:
-
-- Data and errors
+- Data, parser and errors
 - Normal controller
-- Result class
 - Result controller
-- 
+

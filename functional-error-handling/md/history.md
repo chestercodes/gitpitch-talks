@@ -1,7 +1,9 @@
 ### History
 
-> In the beginning ~~the Universe~~ computer programming was created.
-> This has made a lot of people very angry and been widely regarded as a bad move
+
+
+@quote[In the beginning ~~the Universe~~ computer programming was created. This has made a lot of people very angry and been widely regarded as a bad move](Douglas Adams, The Restaurant at the End of the Universe)
+
 
 ---
 

@@ -53,3 +53,22 @@ And so on until end function takes `Result` and returns Response
 ### Function names
 
 ![Terms](functional-error-handling/assets/img/Terms.png)
+
+---
+
+### Result in C# ###
+
+
+---?code=functional-error-handling/code/Downloader.Api/Other/Result.cs&lang=cs
+
+@[3-7](Generic abstract class that can only be created as subclasses)
+@[19-27](Ok subclass)
+@[29-37](Error subclass)
+@[9-17](Functions to create and query result)
+
+
+---?code=functional-error-handling/code/Downloader.Api/Other/Extensions.cs&lang=cs
+
+@[7-14](Extension method for bind)
+@[23-30](Extension method for map)
+@[33-39](Match applies success/fail functions to Result to retrieve value)

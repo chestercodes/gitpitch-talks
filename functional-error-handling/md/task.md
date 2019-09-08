@@ -22,3 +22,15 @@ Things that can go wrong:
 ---
 
 ![Task](functional-error-handling/assets/img/TaskPipeline.png)
+
+---
+
+Demo time!
+
+Checklist:
+
+- Data and errors
+- Normal controller
+- Result class
+- Result controller
+- 

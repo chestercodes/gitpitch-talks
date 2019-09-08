@@ -25,9 +25,20 @@ Things that can go wrong:
 
 ---
 
-Demo time!
+Demo time! - Errors, data and parser
 
-- Data, parser and errors
+---?code=functional-error-handling/code/Downloader.Api.Shared/Data.cs&lang=cs
+
+@[3-8](File names from api control behaviour and errors)
+@[12-21](Fake csv file can be either valid or invalid)
+
+---?code=functional-error-handling/code/Downloader.Api/Other/PersonAmount.cs&lang=cs
+
+---?code=functional-error-handling/code/Downloader.Api/Other/FileParser.cs&lang=cs
+
+---
+
+Demo time! - Data, parser and errors
 - Normal controller
 - Result controller
 

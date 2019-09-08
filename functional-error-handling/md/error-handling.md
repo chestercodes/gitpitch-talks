@@ -44,6 +44,12 @@ Second operation takes `Result` and applies function if `TOk`, does nothing if `
 
 ---
 
-TODO
+And so on until end function takes `Result` and returns Response
 
 ![Pipeline3](functional-error-handling/assets/img/Pipeline3.png)
+
+---
+
+### Function names
+
+![Terms](functional-error-handling/assets/img/Terms.png)

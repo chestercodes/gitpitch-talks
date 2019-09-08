@@ -24,5 +24,13 @@ Wrap dangerous operation in data structure, called `Result` type.
 - `TOk` if the operation was ok
 - `TError` if there was an error
 
---- 
+---
 
+Programs become a pipeline of `Result<TOk,TError>` types.
+
+HttpRequest -> `Result<TOk1,TError>` -> `Result<TOk2,TError>` -> ... -> HttpResponse
+
+First operation creates `Result` which is unwrapped to produce response, with
+
+- `TOk` -> 200
+- `TError` -> 400s, 500

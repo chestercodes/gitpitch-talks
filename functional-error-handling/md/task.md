@@ -19,3 +19,6 @@ Things that can go wrong:
 - File might be un-parsable -> 422
 - Other error -> 500
 
+---
+
+![Task](functional-error-handling/assets/img/TaskPipeline.png)

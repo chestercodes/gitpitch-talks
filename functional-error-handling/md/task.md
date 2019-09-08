@@ -36,9 +36,13 @@ Demo time! - Errors, data and parser
 
 ---?code=functional-error-handling/code/Downloader.Api/Other/FileParser.cs&lang=cs
 
+@[8-17](FileParser takes contents returns PersonAmount collection)
+@[17-31](Tries to parse, throws if can't)
+
 ---
 
-Demo time! - Data, parser and errors
+Demo time! 
+
 - Normal controller
 - Result controller
 

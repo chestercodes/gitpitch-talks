@@ -6,9 +6,11 @@
         {
         }
 
-        public static Result<TOk, TError> Ok(TOk item) => new OkImpl(item);
+        public static Result<TOk, TError> Ok(TOk item) => 
+            new OkImpl(item);
 
-        public static Result<TOk, TError> Error(TError item) => new ErrorImpl(item);
+        public static Result<TOk, TError> Error(TError item) => 
+            new ErrorImpl(item);
 
         public bool IsOk => this is OkImpl;
 

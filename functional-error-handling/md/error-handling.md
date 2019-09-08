@@ -62,9 +62,9 @@ And so on until end function takes `Result` and returns Response
 ---?code=functional-error-handling/code/Downloader.Api/Other/Result.cs&lang=cs
 
 @[3-7](Generic abstract class that can only be created as subclasses)
-@[19-27](Ok subclass)
-@[29-37](Error subclass)
-@[9-17](Functions to create and query result)
+@[21-29](Ok subclass)
+@[31-39](Error subclass)
+@[9-19](Functions to create and query result)
 
 
 ---?code=functional-error-handling/code/Downloader.Api/Other/Extensions.cs&lang=cs

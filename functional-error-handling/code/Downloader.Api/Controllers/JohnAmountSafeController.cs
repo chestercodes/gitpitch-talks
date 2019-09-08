@@ -30,24 +30,24 @@ namespace Downloader.Api.Controllers
                         .Sum(x => x.Amount);
                 })
                 .Match<decimal, IJohnAmountError, ActionResult>(
-                amount =>
-                {
-                    return this.Ok(amount);
-                },
-                error =>
-                {
-                    switch (error)
+                    amount =>
                     {
-                        case SftpUnauthorised _:
-                            return Unauthorized();
-                        case FileDoesntExist _:
-                            return NotFound();
-                        case FileDoesntParse _:
-                            return this.UnprocessableEntity();
-                        default:
-                            throw new NotImplementedException($"Not implemented program error type {error.GetType().FullName}");
-                    }
-                });
+                        return this.Ok(amount);
+                    },
+                    error =>
+                    {
+                        switch (error)
+                        {
+                            case SftpUnauthorised _:
+                                return Unauthorized();
+                            case FileDoesntExist _:
+                                return NotFound();
+                            case FileDoesntParse _:
+                                return this.UnprocessableEntity();
+                            default:
+                                throw new NotImplementedException($"Not implemented program error type {error.GetType().FullName}");
+                        }
+                    });
         }
     }
 }

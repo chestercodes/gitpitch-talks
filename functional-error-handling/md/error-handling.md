@@ -29,7 +29,11 @@ Wrap dangerous operation in data structure, called `Result` type.
 
 Programs become a pipeline of `Result<TOk,TError>` types.
 
-HttpRequest -> `Result<TOk1,TError>` -> `Result<TOk2,TError>` -> ... -> HttpResponse
+- HttpRequest -> 
+- `Result<TOk1,TError>` ->
+- `Result<TOk2,TError>` -> 
+- ... -> 
+- HttpResponse
 
 ---
 

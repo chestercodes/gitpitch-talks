@@ -1,129 +1,31 @@
-GET http://localhost:29701/api/johnamount/something HTTP/1.1
-content-type: application/json
-
-{
-}
-
-###
-
-GET http://localhost:29701/api/johnamount/UnauthorisedSftp HTTP/1.1
-content-type: application/json
-
-{
-}
+@port = 29701
+@controller = johnamount
+#@controller = johnamountsafe
+#@controller = johnamountsafeasync
 
 ###
 
-GET http://localhost:29701/api/johnamount/FileMissingOnSftp HTTP/1.1
+GET http://localhost:{{port}}/api/{{controller}}/allGood HTTP/1.1
 content-type: application/json
 
 {
 }
-
 ###
-
-GET http://localhost:29701/api/johnamount/FileDoesntParse HTTP/1.1
+GET http://localhost:{{port}}/api/{{controller}}/UnauthorisedSftp HTTP/1.1
 content-type: application/json
 
 {
 }
-
 ###
-
-
-GET http://localhost:29701/api/johnamountsafe/something HTTP/1.1
+GET http://localhost:{{port}}/api/{{controller}}/FileMissingOnSftp HTTP/1.1
 content-type: application/json
 
 {
 }
-
 ###
-
-GET http://localhost:29701/api/johnamountsafe/UnauthorisedSftp HTTP/1.1
+GET http://localhost:{{port}}/api/{{controller}}/FileDoesntParse HTTP/1.1
 content-type: application/json
 
 {
 }
 
-###
-
-GET http://localhost:29701/api/johnamountsafe/FileMissingOnSftp HTTP/1.1
-content-type: application/json
-
-{
-}
-
-###
-
-GET http://localhost:29701/api/johnamountsafe/FileDoesntParse HTTP/1.1
-content-type: application/json
-
-{
-}
-
-
-### F# version
-
-GET http://localhost:5000/api/johnamount/something HTTP/1.1
-content-type: application/json
-
-{
-}
-
-###
-
-GET http://localhost:5000/api/johnamount/UnauthorisedSftp HTTP/1.1
-content-type: application/json
-
-{
-}
-
-###
-
-GET http://localhost:5000/api/johnamount/FileMissingOnSftp HTTP/1.1
-content-type: application/json
-
-{
-}
-
-###
-
-GET http://localhost:5000/api/johnamount/FileDoesntParse HTTP/1.1
-content-type: application/json
-
-{
-}
-
-###
-
-GET http://localhost:5000/api/johnamountsafe/something HTTP/1.1
-content-type: application/json
-
-{
-}
-
-###
-
-GET http://localhost:5000/api/johnamountsafe/UnauthorisedSftp HTTP/1.1
-content-type: application/json
-
-{
-}
-
-###
-
-GET http://localhost:5000/api/johnamountsafe/FileMissingOnSftp HTTP/1.1
-content-type: application/json
-
-{
-}
-
-###
-
-GET http://localhost:5000/api/johnamountsafe/FileDoesntParse HTTP/1.1
-content-type: application/json
-
-{
-}
-
-###

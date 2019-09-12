@@ -1,32 +1,36 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Downloader.Api.Other;
+using Downloader.Api.Safe;
+using LanguageExt;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Downloader.Api.Controllers
 {
-    using Safe;
-    using static Other.ResultExtensions;
+    using SafeAsync;
 
     [Route("api/[controller]")]
     [ApiController]
-    public class JohnAmountSafeController : ControllerBase
+    public class JohnAmountSafeAsyncController : ControllerBase
     {
         [HttpGet("{fileName}")]
-        public ActionResult Get(string fileName)
+        public async Task<ActionResult> Get(string fileName)
         {
             var downloader = new Downloader();
             var parser = new Parser();
 
-            return downloader
+            return (await downloader
                 .GetFile(fileName)
-                .Bind(parser.Parse)
-                .Map(personAmounts =>
+                .BindAsync(parser.Parse)
+                .MapAsync(personAmounts =>
                 {
                     return personAmounts
                         .Where(x => x.Name == "John")
                         .Sum(x => x.Amount);
-                })
-                .Match<decimal, IJohnAmountError, ActionResult>(
+                }))
+                .Match<ActionResult>(
                     amount => this.Ok(amount),
                     error =>
                     {

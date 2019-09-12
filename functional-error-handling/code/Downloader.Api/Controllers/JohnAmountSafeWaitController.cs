@@ -1,15 +1,15 @@
 ﻿using System;
-using System.Linq;
+using Downloader.Api.Safe;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace Downloader.Api.Controllers
 {
-    using Safe;
-    using static Other.ResultExtensions;
-
+    using SafeWait;
+    
     [Route("api/[controller]")]
     [ApiController]
-    public class JohnAmountSafeController : ControllerBase
+    public class JohnAmountSafeWaitController : ControllerBase
     {
         [HttpGet("{fileName}")]
         public ActionResult Get(string fileName)
@@ -17,7 +17,7 @@ namespace Downloader.Api.Controllers
             var downloader = new Downloader();
             var parser = new Parser();
 
-            return downloader
+            return (downloader
                 .GetFile(fileName)
                 .Bind(parser.Parse)
                 .Map(personAmounts =>
@@ -25,8 +25,8 @@ namespace Downloader.Api.Controllers
                     return personAmounts
                         .Where(x => x.Name == "John")
                         .Sum(x => x.Amount);
-                })
-                .Match<decimal, IJohnAmountError, ActionResult>(
+                }))
+                .Match<ActionResult>(
                     amount => this.Ok(amount),
                     error =>
                     {

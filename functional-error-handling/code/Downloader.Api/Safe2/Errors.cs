@@ -1,4 +1,4 @@
-﻿namespace Downloader.Api.Safe
+﻿namespace Downloader.Api.Safe2
 { 
     public interface IJohnAmountError {}
 

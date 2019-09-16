@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace Downloader.Api.Controllers
 {
     using Safe2;
-    using static Other.ResultExtensions;
 
     [Route("api/[controller]")]
     [ApiController]
@@ -19,6 +18,8 @@ namespace Downloader.Api.Controllers
 
             return downloader
                 .GetFile(fileName)
+                                        // IDownloadError => IJohnAmountError
+                .MapLeft<IJohnAmountError>(error => new DownloadError(error))
                 .Bind(parser.Parse)
                 .Map(personAmounts =>
                 {
@@ -26,22 +27,33 @@ namespace Downloader.Api.Controllers
                         .Where(x => x.Name == "John")
                         .Sum(x => x.Amount);
                 })
-                .Match<decimal, IJohnAmountError, ActionResult>(
+                .Match<ActionResult>(
                     amount => this.Ok(amount),
                     error =>
                     {
                         switch (error)
                         {
-                            case SftpUnauthorised _:
-                                return Unauthorized();
-                            case FileDoesntExist _:
-                                return NotFound();
+                            case DownloadError downloadError:
+                                switch (downloadError.Error)
+                                {
+                                    case SftpUnauthorised _:
+                                        return Unauthorized();
+                                    case FileDoesntExist _:
+                                        return NotFound();
+
+                                    default: throw UnhandledReturnType(downloadError);
+                                }
                             case FileDoesntParse _:
                                 return this.UnprocessableEntity();
-                            default:
-                                throw new NotImplementedException($"Not implemented program error type {error.GetType().FullName}");
+
+                            default: throw UnhandledReturnType(error);
                         }
                     });
+        }
+
+        private static Exception UnhandledReturnType(object err)
+        {
+            return new NotImplementedException($"Not implemented program error type {err.GetType().FullName}");
         }
     }
 }

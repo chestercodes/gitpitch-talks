@@ -1,9 +1,8 @@
 ﻿using Downloader.Api.Shared;
+using LanguageExt;
 
 namespace Downloader.Api.Safe2
 {
-    using Other;
-
     public class Downloader
     {
         public Either<IDownloadError, string> GetFile(string fileName)

@@ -53,6 +53,12 @@ And so on until end function takes `Result` and returns Response
 
 ![Pipeline3](functional-error-handling/assets/img/Pipeline3.png)
 
+Similar behaviour to:
+
+```cs
+var subSubPropOrNull = data?.Prop?.SubProp?.SubSubProp
+```
+
 ---
 
 ### Function names

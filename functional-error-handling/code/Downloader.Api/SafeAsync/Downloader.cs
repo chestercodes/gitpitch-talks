@@ -7,18 +7,18 @@ namespace Downloader.Api.SafeAsync
 {
     public class Downloader
     {
-        public async Task<Either<IJohnAmountError, string>> GetFile(string fileName)
+        public async Task<Either<JohnAmountError, string>> GetFile(string fileName)
         {
             await Task.Delay(2000);
 
             if (fileName == FileNames.UnauthorisedSftp)
             {
-                return new SftpUnauthorised();
+                return new JohnAmountError.SftpUnauthorised();
             }
 
             if (fileName == FileNames.FileMissingOnSftp)
             {
-                return new FileDoesntExist();
+                return new JohnAmountError.FileDoesntExist();
             }
 
             if (fileName == FileNames.FileDoesntParse)

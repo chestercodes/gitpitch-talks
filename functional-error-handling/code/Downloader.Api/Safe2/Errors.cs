@@ -1,24 +1,29 @@
 ﻿namespace Downloader.Api.Safe2
-{ 
-    public interface IJohnAmountError {}
-
-    public class FileDoesntParse : IJohnAmountError { }
-
-
-    public class DownloadError : IJohnAmountError
+{
+    public class JohnAmountError
     {
-        public DownloadError(IDownloadError error)
-        {
-            Error = error;
-        }
+        private JohnAmountError(){}
+        
+        public class FileDoesntParse : JohnAmountError { }
 
-        public IDownloadError Error { get; }
+
+        public class DownloadFailed : JohnAmountError
+        {
+            public DownloadFailed(DownloadError error)
+            {
+                Error = error;
+            }
+
+            public DownloadError Error { get; }
+        }    
     }
 
-    public interface IDownloadError { }
+    public class DownloadError
+    {
+        private DownloadError(){}
+        
+        public class SftpUnauthorised : DownloadError { }
 
-    public class SftpUnauthorised : IDownloadError { }
-
-    public class FileDoesntExist : IDownloadError { }
-
+        public class FileDoesntExist : DownloadError { }
+    }
 }

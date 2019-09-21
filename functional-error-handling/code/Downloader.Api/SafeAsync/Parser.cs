@@ -10,7 +10,7 @@ namespace Downloader.Api.SafeAsync
     
     public class Parser
     {
-        public Either<IJohnAmountError, IEnumerable<PersonAmount>> Parse(string contents)
+        public Either<JohnAmountError, IEnumerable<PersonAmount>> Parse(string contents)
         {
             var fileParser = new FileParser();
 
@@ -22,7 +22,7 @@ namespace Downloader.Api.SafeAsync
             }
             catch
             {
-                return new FileDoesntParse();
+                return new JohnAmountError.FileDoesntParse();
             }
         }
     }

@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Result = Downloader.Api.Other.Result<System.Collections.Generic.IEnumerable<Downloader.Api.Other.PersonAmount>, Downloader.Api.Safe.IJohnAmountError>;
+using Result = Downloader.Api.Other.Result<System.Collections.Generic.IEnumerable<Downloader.Api.Other.PersonAmount>, Downloader.Api.Safe.JohnAmountError>;
 
 namespace Downloader.Api.Safe
 {
@@ -19,7 +19,7 @@ namespace Downloader.Api.Safe
             }
             catch
             {
-                return Result.Error(new FileDoesntParse());
+                return Result.Error(new JohnAmountError.FileDoesntParse());
             }
         }
     }

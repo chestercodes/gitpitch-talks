@@ -26,17 +26,17 @@ namespace Downloader.Api.Controllers
                         .Where(x => x.Name == "John")
                         .Sum(x => x.Amount);
                 })
-                .Match<decimal, IJohnAmountError, ActionResult>(
+                .Match<decimal, JohnAmountError, ActionResult>(
                     amount => this.Ok(amount),
                     error =>
                     {
                         switch (error)
                         {
-                            case SftpUnauthorised _:
+                            case JohnAmountError.SftpUnauthorised _:
                                 return Unauthorized();
-                            case FileDoesntExist _:
+                            case JohnAmountError.FileDoesntExist _:
                                 return NotFound();
-                            case FileDoesntParse _:
+                            case JohnAmountError.FileDoesntParse _:
                                 return this.UnprocessableEntity();
                             default:
                                 throw new NotImplementedException($"Not implemented program error type {error.GetType().FullName}");

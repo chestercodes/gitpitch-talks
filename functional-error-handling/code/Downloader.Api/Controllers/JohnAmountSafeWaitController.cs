@@ -32,11 +32,11 @@ namespace Downloader.Api.Controllers
                     {
                         switch (error)
                         {
-                            case SftpUnauthorised _:
+                            case JohnAmountError.SftpUnauthorised _:
                                 return Unauthorized();
-                            case FileDoesntExist _:
+                            case JohnAmountError.FileDoesntExist _:
                                 return NotFound();
-                            case FileDoesntParse _:
+                            case JohnAmountError.FileDoesntParse _:
                                 return this.UnprocessableEntity();
                             default:
                                 throw new NotImplementedException($"Not implemented program error type {error.GetType().FullName}");

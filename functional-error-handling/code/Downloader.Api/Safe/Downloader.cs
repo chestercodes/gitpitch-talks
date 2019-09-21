@@ -6,16 +6,16 @@ namespace Downloader.Api.Safe
 
     public class Downloader
     {
-        public Result<string, IJohnAmountError> GetFile(string fileName)
+        public Result<string, JohnAmountError> GetFile(string fileName)
         {
             if (fileName == FileNames.UnauthorisedSftp)
             {
-                return Error(new SftpUnauthorised());
+                return Error(new JohnAmountError.SftpUnauthorised());
             }
 
             if (fileName == FileNames.FileMissingOnSftp)
             {
-                return Error(new FileDoesntExist());
+                return Error(new JohnAmountError.FileDoesntExist());
             }
 
             if (fileName == FileNames.FileDoesntParse)
@@ -26,14 +26,14 @@ namespace Downloader.Api.Safe
             return Ok(FileContent.ValidFile);
         }
 
-        private static Result<string, IJohnAmountError> Ok(string content)
+        private static Result<string, JohnAmountError> Ok(string content)
         {
-            return Result<string, IJohnAmountError>.Ok(content);
+            return Result<string, JohnAmountError>.Ok(content);
         }
 
-        private Result<string, IJohnAmountError> Error(IJohnAmountError error)
+        private Result<string, JohnAmountError> Error(JohnAmountError error)
         {
-            return Result<string, IJohnAmountError>.Error(error);
+            return Result<string, JohnAmountError>.Error(error);
         }
     }
 }

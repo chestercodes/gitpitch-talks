@@ -7,18 +7,18 @@ namespace Downloader.Api.SafeWait
 {
     public class Downloader
     {
-        public Either<IJohnAmountError, string> GetFile(string fileName)
+        public Either<JohnAmountError, string> GetFile(string fileName)
         {
             Thread.Sleep(2000);
 
             if (fileName == FileNames.UnauthorisedSftp)
             {
-                return new SftpUnauthorised();
+                return new JohnAmountError.SftpUnauthorised();
             }
 
             if (fileName == FileNames.FileMissingOnSftp)
             {
-                return new FileDoesntExist();
+                return new JohnAmountError.FileDoesntExist();
             }
 
             if (fileName == FileNames.FileDoesntParse)

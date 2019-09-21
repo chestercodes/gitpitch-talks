@@ -5,16 +5,16 @@ namespace Downloader.Api.Safe2
 {
     public class Downloader
     {
-        public Either<IDownloadError, string> GetFile(string fileName)
+        public Either<DownloadError, string> GetFile(string fileName)
         {
             if (fileName == FileNames.UnauthorisedSftp)
             {
-                return new SftpUnauthorised();
+                return new DownloadError.SftpUnauthorised();
             }
 
             if (fileName == FileNames.FileMissingOnSftp)
             {
-                return new FileDoesntExist();
+                return new DownloadError.FileDoesntExist();
             }
 
             if (fileName == FileNames.FileDoesntParse)

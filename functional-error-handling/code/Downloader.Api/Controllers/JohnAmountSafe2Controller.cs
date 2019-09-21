@@ -18,8 +18,8 @@ namespace Downloader.Api.Controllers
 
             return downloader
                 .GetFile(fileName)
-                                        // IDownloadError => IJohnAmountError
-                .MapLeft<IJohnAmountError>(error => new DownloadError(error))
+                                        // DownloadError => JohnAmountError
+                .MapLeft<JohnAmountError>(error => new JohnAmountError.DownloadFailed(error))
                 .Bind(parser.Parse)
                 .Map(personAmounts =>
                 {
@@ -33,17 +33,17 @@ namespace Downloader.Api.Controllers
                     {
                         switch (error)
                         {
-                            case DownloadError downloadError:
+                            case JohnAmountError.DownloadFailed downloadError:
                                 switch (downloadError.Error)
                                 {
-                                    case SftpUnauthorised _:
+                                    case DownloadError.SftpUnauthorised _:
                                         return Unauthorized();
-                                    case FileDoesntExist _:
+                                    case DownloadError.FileDoesntExist _:
                                         return NotFound();
 
                                     default: throw UnhandledReturnType(downloadError);
                                 }
-                            case FileDoesntParse _:
+                            case JohnAmountError.FileDoesntParse _:
                                 return this.UnprocessableEntity();
 
                             default: throw UnhandledReturnType(error);

@@ -1,4 +1,4 @@
-﻿namespace Downloader.Api.Safe
+﻿namespace Downloader.Api.Other
 { 
     public class JohnAmountError
     {

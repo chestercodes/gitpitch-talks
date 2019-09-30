@@ -1,12 +1,14 @@
 ﻿using System;
-using Downloader.Api.Safe;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using System.Threading;
+using Downloader.Api.Other;
+using Downloader.Api.Shared;
+using LanguageExt;
 
 namespace Downloader.Api.Controllers
 {
-    using SafeWait;
-    
     [Route("api/[controller]")]
     [ApiController]
     public class JohnAmountSafeWaitController : ControllerBase
@@ -42,6 +44,50 @@ namespace Downloader.Api.Controllers
                                 throw new NotImplementedException($"Not implemented program error type {error.GetType().FullName}");
                         }
                     });
+        }
+
+        public class Downloader
+        {
+            public Either<JohnAmountError, string> GetFile(string fileName)
+            {
+                Thread.Sleep(2000);
+
+                if (fileName == FileNames.UnauthorisedSftp)
+                {
+                    return new JohnAmountError.SftpUnauthorised();
+                }
+
+                if (fileName == FileNames.FileMissingOnSftp)
+                {
+                    return new JohnAmountError.FileDoesntExist();
+                }
+
+                if (fileName == FileNames.FileDoesntParse)
+                {
+                    return FileContent.InvalidFile;
+                }
+
+                return FileContent.ValidFile;
+            }
+        }
+
+        public class Parser
+        {
+            public Either<JohnAmountError, IEnumerable<PersonAmount>> Parse(string contents)
+            {
+                var fileParser = new FileParser();
+
+                try
+                {
+                    var personAmounts = fileParser.Parse(contents).ToList();
+
+                    return personAmounts;
+                }
+                catch
+                {
+                    return new JohnAmountError.FileDoesntParse();
+                }
+            }
         }
     }
 }

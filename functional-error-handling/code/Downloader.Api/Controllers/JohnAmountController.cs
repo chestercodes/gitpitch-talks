@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using Downloader.Api.Other;
+using Downloader.Api.Shared;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Downloader.Api.Controllers
 {
-    using Unsafe;
-    using Downloader.Api.Shared;
-
     [Route("api/[controller]")]
     [ApiController]
     public class JohnAmountController : ControllerBase
@@ -44,6 +42,50 @@ namespace Downloader.Api.Controllers
             catch (FileDoesntExistException)
             {
                 return NotFound();
+            }
+        }
+
+        public class SftpUnauthorisedException : Exception { }
+        public class FileDoesntExistException : Exception { }
+        public class FileDoesntParseException : Exception { }
+
+        public class Downloader
+        {
+            public string GetFile(string fileName)
+            {
+                if (fileName == FileNames.UnauthorisedSftp)
+                {
+                    throw new SftpUnauthorisedException();
+                }
+
+                if (fileName == FileNames.FileMissingOnSftp)
+                {
+                    throw new FileDoesntExistException();
+                }
+
+                if (fileName == FileNames.FileDoesntParse)
+                {
+                    return FileContent.InvalidFile;
+                }
+
+                return FileContent.ValidFile;
+            }
+        }
+
+        public class Parser
+        {
+            public IEnumerable<PersonAmount> Parse(string content)
+            {
+                var fileParser = new FileParser();
+
+                try
+                {
+                    return fileParser.Parse(content);
+                }
+                catch (Exception)
+                {
+                    throw new FileDoesntParseException();
+                }
             }
         }
     }

@@ -49,5 +49,7 @@ Have a web service that returns a `User` object given a tenant and user ids in t
 
 Links
 
+[Strongly typed entity ids posts](https://andrewlock.net/using-strongly-typed-entity-ids-to-avoid-primitive-obsession-part-1/)
+
 [Domain modelling made functional - Scott Wlaschin](https://www.youtube.com/watch?v=Up7LcbGZFuo)
 

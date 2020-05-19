@@ -6,7 +6,8 @@ namespace Project.Api.Domain.UnTyped
     {
         public TenantIdExistsQuery(Guid tenantId)
         {
-            if(tenantId == default(Guid)){
+            if(tenantId == default)
+            {
                 throw new ArgumentException("tenantId is default value");
             }
 

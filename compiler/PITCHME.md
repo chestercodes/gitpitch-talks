@@ -21,7 +21,7 @@ Tech(nologies/niques) that move bug discoveries down the ladder are good.
 
 ---
 
-@quote[A good type-system is worth a thousand unit tests](Henry VII)
+@quote[A good type-system is worth a thousand unit tests](Abraham Lincoln)
 
 --- 
 

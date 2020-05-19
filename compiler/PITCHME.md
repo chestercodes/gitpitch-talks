@@ -28,7 +28,7 @@ Tech(nologies/niques) that move bug discoveries down the ladder are good.
 Types have advantages that they:
 
 - Move errors down the ladder to the compiler stage
-- constrain execution paths
+- constrain execution paths to remove invalid states
 - act as system documentation
 
 --- 
@@ -46,4 +46,8 @@ Disadvantages:
 Have a web service that returns a `User` object given a tenant and user ids in the form of guids
 
 ---
+
+Links
+
+[Domain modelling made functional - Scott Wlaschin](https://www.youtube.com/watch?v=Up7LcbGZFuo)
 

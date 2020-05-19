@@ -17,15 +17,11 @@ Tech(nologies/niques) that move bug discoveries down the ladder are good.
 
 ---
 
-@snap[north-east span-20]
 @quote[I love types](Me)
-@snapend
 
 ---
 
-@snap[north-east span-20]
 @quote[A good type-system is worth a thousand unit tests](Henry VII)
-@snapend
 
 --- 
 

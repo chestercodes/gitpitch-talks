@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Project.Typed
+namespace Project.Api.Domain.Typed
 {
     public class UserQuery
     {

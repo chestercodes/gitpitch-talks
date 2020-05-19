@@ -6,12 +6,12 @@ namespace Project.UnTyped
     {
         public UserQuery(Guid id, Guid tenantId)
         {
-            if (id == default(Guid))
+            if (id == default)
             {
                 throw new ArgumentException("id is default value.");
             }
 
-            if (tenantId == default(Guid))
+            if (tenantId == default)
             {
                 throw new ArgumentException("id is default value.");
             }
@@ -26,16 +26,17 @@ namespace Project.UnTyped
 
     public class UserQueryHandler
     {
+        private UserRepo Repo = new UserRepo();
+
         public User Execute(UserQuery query)
         {
             if (query == null)
             {
-                throw new ArgumentException("query is default value.");
+                throw new ArgumentException("query is null.");
             }
 
-            var repo = new UserRepo();
-
-            return repo.GetUserOrNull(query.Id, query.TenantId);
+            return Repo.GetUserOrNull(query.Id, query.TenantId)
+                        ?? throw new Exception($"Cannot find user '{query.Id}'");
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Project.UnTyped
+namespace Project.Api.Domain.UnTyped
 {
     public class UserRepo
     {

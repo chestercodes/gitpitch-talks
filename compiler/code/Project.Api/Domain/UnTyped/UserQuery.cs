@@ -1,17 +1,27 @@
 ﻿using System;
 
-namespace Project.Typed
+namespace Project.Api.Domain.UnTyped
 {
     public class UserQuery
     {
-        public UserQuery(UserId id, UnverifiedTenantId tenantId)
+        public UserQuery(Guid id, Guid tenantId)
         {
+            if (id == default)
+            {
+                throw new ArgumentException("id is default value.");
+            }
+
+            if (tenantId == default)
+            {
+                throw new ArgumentException("id is default value.");
+            }
+            
             Id = id;
             TenantId = tenantId;
         }
 
-        public UserId Id { get; }
-        public UnverifiedTenantId TenantId { get; }
+        public Guid Id { get; }
+        public Guid TenantId { get; }
     }
 
     public class UserQueryHandler

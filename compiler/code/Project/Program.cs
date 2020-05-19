@@ -6,8 +6,6 @@ namespace Project
     {
         static void Main(string[] args)
         {
-            var impl = new UnTyped.Implementation();
-            impl.Go();
         }
     }
 }

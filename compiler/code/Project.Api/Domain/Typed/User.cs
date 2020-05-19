@@ -4,7 +4,7 @@ namespace Project.Api.Domain.Typed
 {
     public class User
     {
-        public User(UserId userId, KnownTenantId tenantId, string name)
+        public User(UserId userId, KnownTenantId tenantId, Name name)
         {
             UserId = userId;
             TenantId = tenantId;
@@ -18,6 +18,6 @@ namespace Project.Api.Domain.Typed
 
         public UserId UserId { get; }
         public KnownTenantId TenantId { get; }
-        public string Name { get; }
+        public Name Name { get; }
     }
 }

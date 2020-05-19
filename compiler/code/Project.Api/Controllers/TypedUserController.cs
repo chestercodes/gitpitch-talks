@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Project.Api.Domain.Typed;
 
@@ -15,26 +12,30 @@ namespace Project.Api.Controllers
 
         [HttpGet]
         [Route("tenant2/{tenantId}/user/{userId}")]
-        public ActionResult<User> Get(Guid tenantIdParam, Guid userIdParam)
+        public ActionResult<User> Get(Guid tenantId, Guid userId)
         {
+            var unverifiedTenantId = UnverifiedTenantId.From(tenantId);
+            var userIdVal = UserId.From(userId);
+
             try
             {
-                //TenantIdExistsQueryHandler.Execute(new TenantIdExistsQuery(tenantId));
+                var knownTenantId = TenantIdExistsQueryHandler.Execute(new TenantIdExistsQuery(unverifiedTenantId));
+
+                try
+                {
+                    var user = UserQueryHandler.Execute(new UserQuery(userIdVal, knownTenantId));
+
+                    return new JsonResult(user);
+                }
+                catch (Exception)
+                {
+                    return NotFound();
+                }
             }
             catch (Exception)
             {
                 return UnprocessableEntity();
             }
-
-            try
-            {
-                //var user = UserQueryHandler.Execute(new UserQuery(tenantId, userId));
-                //return new JsonResult(user);
-            }
-            catch (Exception)
-            {
-            }
-            return NotFound();
         }
     }
 }

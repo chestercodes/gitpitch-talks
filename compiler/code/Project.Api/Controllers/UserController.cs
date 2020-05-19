@@ -20,20 +20,20 @@ namespace Project.Api.Controllers
             try
             {
                 TenantIdExistsQueryHandler.Execute(new TenantIdExistsQuery(tenantId));
+
+                try
+                {
+                    var user = UserQueryHandler.Execute(new UserQuery(tenantId, userId));
+                    return new JsonResult(user);
+                }
+                catch (Exception)
+                {
+                    return NotFound();
+                }
             }
             catch (Exception)
             {
                 return UnprocessableEntity();
-            }
-
-            try
-            {
-                var user = UserQueryHandler.Execute(new UserQuery(tenantId, userId));
-                return new JsonResult(user);
-            }
-            catch (Exception)
-            {
-                return NotFound();
             }
         }
     }

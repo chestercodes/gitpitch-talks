@@ -14,16 +14,15 @@ namespace Project.Api.Domain.Typed
 
     public class TenantIdExistsQueryHandler
     {
-        public UnverifiedTenantId Execute(TenantIdExistsQuery query)
+        public KnownTenantId Execute(TenantIdExistsQuery query)
         {
             if (query == null)
             {
                 throw new ArgumentException("query is null.");
             }
-
-            if(query.TenantId.Equals(Guid.Parse("20000000-0000-0000-0000-000000000000")))
+            if(query.TenantId.Value == Guid.Parse("20000000-0000-0000-0000-000000000000"))
             {
-                return query.TenantId;
+                return KnownTenantId.From(query.TenantId.Value);
             } 
             else 
             {

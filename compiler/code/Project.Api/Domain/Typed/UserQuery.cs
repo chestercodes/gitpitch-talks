@@ -4,14 +4,14 @@ namespace Project.Api.Domain.Typed
 {
     public class UserQuery
     {
-        public UserQuery(UserId id, UnverifiedTenantId tenantId)
+        public UserQuery(UserId id, KnownTenantId tenantId)
         {
             Id = id;
             TenantId = tenantId;
         }
 
         public UserId Id { get; }
-        public UnverifiedTenantId TenantId { get; }
+        public KnownTenantId TenantId { get; }
     }
 
     public class UserQueryHandler

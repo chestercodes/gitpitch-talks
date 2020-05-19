@@ -3,6 +3,14 @@
 @userId = 10000000-0000-0000-0000-000000000000
 @tenantId = 20000000-0000-0000-0000-000000000000
 
+GET https://{{baseUrl}}/tenant/{{tenantId}}/user/{{userId}} HTTP/1.1
+content-type: application/json
+
+{
+}
+
+###
+
 GET https://{{baseUrl}}/tenant2/{{tenantId}}/user/{{userId}} HTTP/1.1
 content-type: application/json
 
@@ -10,21 +18,3 @@ content-type: application/json
 }
 
 ###
-
-GET https://{{baseUrl}}/tenant/user2 HTTP/1.1
-content-type: application/json
-
-{
-    "tenantId": "{{tenantId}}",
-    "userId": "{{userId}}"
-}
-
-###
-
-GET https://{{baseUrl}}/tenant/user2 HTTP/1.1
-content-type: application/json
-
-{
-    "tenantId": "6ad2daba-865e-42df-b855-eafcbbe70831",
-    "userId": "843a7da0-1c02-4647-89a3-3652a5ff92d6"
-}
